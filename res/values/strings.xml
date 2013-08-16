@@ -1,0 +1,116 @@
+<!--
+  Copyright 2013 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<resources>
+
+    <string name="app_name">Projects On The Go</string>
+    <string name="title_activity_login">Login Activity</string>
+    <string name="title_activity_createbug">Create bug</string>
+    <string name="update_bug">Update bug</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="bugname">Name</string>
+    <string name="attachment">Attachment</string>
+    <string name="add_attachment">Add attachment</string>
+    <string name="assignee_label">Assignees</string>
+    <string name="project_name_hint_text">Project Name</string>
+    <string name="description_hint_text">Description</string>
+    <string name="name_hint_text">Name</string>
+    <string name="steps_label">Steps</string>
+    <string name="add_step"> Add step</string>
+    <string name="proj_moderators_label">Moderators</string>
+    <string name="proj_members_label">Members</string>
+    <string name="users_added_text">Users Added</string>
+    <string name="title">Title :</string>
+    <string name="due_date">Due date :</string>
+    <string name="bug_description">Bug description</string>
+    <string name="bug_name">Bug name</string>
+    <string name="status">Status</string>
+    <string name="severity">Severity</string>
+    <string name="reproducible">Reproducible</string>
+    <string name="created_by">Created by :</string>
+    <string name="created_at">Created at :</string>
+    <string name="bug_title">Bug title</string>
+    <string name="bug_created_by">Bug created by</string>
+    <string name="created_at_no_colon">Created at</string>
+    <string name="due_date_no_colon">Due date</string>
+    <string name="task_name">Task name</string>
+    <string name="task_description">Task description</string>
+    <string name="task_steps">Steps</string>
+    <string name="create_task">Create task</string>
+    <string name="select_user">Select user</string>
+    <string name="comments">Comments :</string>
+    <string name="step_task_name">Step task name</string>
+    <string name="step_task_description">Step task description</string>
+    <string name="is_complete">is complete?</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="name">Name</string>
+    <string name="oops_something_went_wrong">Oops! Something went wrong</string>
+    <string name="assignees">Assignees</string>
+    <string name="update">Update</string>
+    <string name="menu_name">menu_name</string>
+    <string name="menu_uid">menu_uid</string>
+    <string name="loading_task_list">Loading task list...</string>
+    <string name="loading_project_list">Loading project list...</string>
+    <string name="loading_bugs_list">Loading bugs list...</string>
+    <string name="loading_milestone_list">Loading milestone list...</string>
+    <string name="loading_comments_list">Loading comments list...</string>
+    <string name="loading">Loading....</string>
+    <string name="updating_task">Updating task...</string>
+    <string name="creating_project">Creating project...</string>
+    <string name="creating_task">Creating task...</string>
+     <string name="updating_bug">Updating bug...</string>
+    <string name="creating_bug">Creating bug...</string>
+    <string name="updating_milestone">Updating milestone...</string>
+    <string name="fetching_role">Fetching role...</string>
+    <string name="checking_for_admin">Checking for admin...</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="task_deleted_successfully">Task deleted successfully.</string>
+    <string name="bug_deleted_successfully">Bug deleted successfully.</string>
+    <string name="milestone_deleted_successfully">Milestone deleted successfully.</string>
+    <string name="task_updated_successfully">Task updated successfully.</string>
+    <string name="bug_updated_successfully">Bug updated successfully.</string>
+    <string name="milestone_updated_successfully">Milestone updated successfully.</string>
+    <string name="create_milestone">Create milestone</string>
+    <string name="set_date">Set date</string>
+    <string name="set_due_date">Set due date</string>
+    <string name="create_project">Create project</string>
+    <string name="project_created_successfully">Project created successfully.</string>
+    <string name="bug_created_successfully">Bug created successfully.</string>
+    <string name="task_created_successfully">Task created successfully.</string>
+    <string name="milestone_created_successfully">Milestone created successfully.</string>
+    <string name="really_want_to_delete_bug">Really want to delete bug</string>
+    <string name="delete_bug">Delete bug</string>
+    <string name="delete">Delete</string>
+    <string name="making_comment">Making comment</string>
+    <string name="create">Create</string>
+    <string name="really_want_to_delete_milestone">Really want to delete milestone</string>
+    <string name="delete_milestone">Delete Milestone</string>
+    <string name="really_want_to_delete_task">Really want to delete task ?</string>
+    <string name="delete_task">Delete task</string>
+    <string name="nothing_selected">Nothing Selected</string>
+    <string name="select_file_for_attachment">Select file for attachment</string>
+    <string name="fragment_edit_name">fragment_edit_name</string>
+    <string name="login_for_access">Login for Access</string>
+    <string name="deleting_bug_">Deleting bug...</string>
+    <string name="deleting_task">Deleting Task...</string>
+    <string name="deleting_milestone">Deleting milestone...</string>
+    <string name="loading_comments_count">Loading comments count...</string>
+
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">built.io</string>
+    <string name="action_settings">Settings</string>
+    <string name="prompt_tenant">Tenant</string>
+    <string name="prompt_email">username</string>
+    <string name="prompt_password">password</string>
+    <string name="prompt_retype_passsword">retype password</string>
+    <string name="action_sign_in_register">Sign up</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_forgot_password">Recover lost password</string>
+    <string name="login_progress_signing_in">Signing in&#8230;</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="log_in">Log In</string>
+    <string name="google_login">Google</string>
+    <string name="twitter_login">Twitter</string>
+    <string name="sign_up">Sign up</string>
+    <string name="or_you_can_login_with">or you can login with</string>
+    <string name="dont_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="account_name">account name</string>
+    <string name="email">email</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="choose_options_title">Choose Options</string>
+    <string name="no_data_text"> No Data</string>
+    <string name="cancel_text_capital_button"> Cancel </string>
+    <string name="no_file_chosen">No File Chosen</string>
+    <string name="sdcard_not_found_error_text">SD card not found</string>
+    <string name="select_picture_text">Select</string>
+    <string name="capture_video_text">Video size should not be more than 10 MB</string>
+    <string name="an_error_occurred_while_reading_a_file_error_text">An error occurred while reading a file.</string>
+    <string name="image_capture_by_camera_text">Image capture by camera</string>
+    <string name="video_capture_by_camera">Video capture by camera</string>
+    <string name="record_video_button">Record video</string>
+    <string name="choose_from_library_button">Choose from library</string>
+    <string name="file_selected_already_error_text">This file is already selected.</string>
+
+    <!-- <asset and choose pic > -->
+    <string name="choose_from_gallery_button">Choose from Gallery</string>
+    <string name="click_a_photo_button">Click a Photo</string>
+    <string name="ok_button">Okay</string>
+    <string name="picture_not_taken_error_text">Picture was not taken</string>
+    <string name="video_not_taken_error_text">Video was not taken</string>
+    <string name="video_path_error_error_text">Unable to retrieve recorded video path, please
+		attach manually.</string>
+
+
+</resources>
