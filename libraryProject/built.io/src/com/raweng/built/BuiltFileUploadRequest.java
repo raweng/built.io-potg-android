@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.zip.GZIPInputStream;
 
+import javax.net.ssl.HostnameVerifier;
+
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -29,6 +31,8 @@ import org.apache.http.conn.params.ConnPerRouteBean;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
@@ -47,7 +51,6 @@ import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
 
 import com.raweng.built.utilities.BuiltAppConstants;
-import com.raweng.built.utilities.EasySSLSocketFactory;
 import com.raweng.built.utilities.RawAppUtils;
 
 /**
@@ -91,7 +94,11 @@ class BuiltFileUploadRequest extends AsyncTask<java.lang.Object, Integer, Void>{
 		// http scheme
 		schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 		// https scheme
-		schemeRegistry.register(new Scheme("https", new EasySSLSocketFactory(), 443));
+//		schemeRegistry.register(new Scheme("https", new EasySSLSocketFactory(), 443));
+		HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+        SSLSocketFactory socketFactory = SSLSocketFactory.getSocketFactory();
+        socketFactory.setHostnameVerifier((X509HostnameVerifier) hostnameVerifier);
+        schemeRegistry.register(new Scheme("https", socketFactory, 443));
 
 		HttpParams params = new BasicHttpParams();
 		params.setParameter(ConnManagerPNames.MAX_TOTAL_CONNECTIONS, 1);
@@ -197,12 +204,12 @@ class BuiltFileUploadRequest extends AsyncTask<java.lang.Object, Integer, Void>{
 
 						if(errorMessage != null){
 
-							error.errorMessage(errorMessage);
+							error.setErrorMessage(errorMessage);
 
 						}else{
-							error.errorMessage(BuiltAppConstants.ErrorMessage_Default);
+							error.setErrorMessage(BuiltAppConstants.ErrorMessage_Default);
 						}
-						error.errorCode(this.httpResponse.getStatusLine().getStatusCode());
+						error.setErrorCode(this.httpResponse.getStatusLine().getStatusCode());
 
 
 						if(! responseJSON.isNull("errors")){
@@ -218,7 +225,7 @@ class BuiltFileUploadRequest extends AsyncTask<java.lang.Object, Integer, Void>{
 							}else{
 								resultHashMap.put("errors", responseJSON.get("errors"));
 							}
-							error.errors(resultHashMap);
+							error.setErrors(resultHashMap);
 						}
 
 
@@ -251,11 +258,11 @@ class BuiltFileUploadRequest extends AsyncTask<java.lang.Object, Integer, Void>{
 			}
 		} catch(Exception e) {
 			BuiltError error = new BuiltError();
-			error.errorMessage(e.toString());
+			error.setErrorMessage(e.toString());
 			if(this.httpResponse != null){
-				error.errorCode(this.httpResponse.getStatusLine().getStatusCode());
+				error.setErrorCode(this.httpResponse.getStatusLine().getStatusCode());
 			}else{
-				error.errorCode(BuiltAppConstants.NONETWORKCONNECTION);
+				error.setErrorCode(BuiltAppConstants.NONETWORKCONNECTION);
 			}
 			if(callBackObjectForUpload != null){
 				callBackObjectForUpload.onError(error);
@@ -328,9 +335,9 @@ class BuiltFileUploadRequest extends AsyncTask<java.lang.Object, Integer, Void>{
 
 		} catch (Exception e) {
 			BuiltError error = new BuiltError();
-			error.errorMessage(e.toString());
+			error.setErrorMessage(e.toString());
 			if(httpResponse != null){
-				error.errorCode(this.httpResponse.getStatusLine().getStatusCode());
+				error.setErrorCode(this.httpResponse.getStatusLine().getStatusCode());
 			}
 			if(callBackObjectForUpload != null){
 				callBackObjectForUpload.onRequestFail(error);

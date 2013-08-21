@@ -158,24 +158,44 @@
                     android:textColor="@color/login_text_color"
                     android:textSize="16sp" />
 
-                <Button
-                    android:id="@+id/logInWithGoogle"
+                <LinearLayout
+                    android:id="@+id/googleTwitterButtonContainer"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/googleInfo"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/item_background_button_selector"
-                    android:text="@string/google_login"
-                    android:textColor="@color/login_button_color"
-                    android:textStyle="bold" />
+                    android:layout_below="@id/googleInfo" >
+
+                    <Button
+                        android:id="@+id/logInWithGoogle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_background_button_selector"
+                        android:text="@string/google_login"
+                        android:textColor="@color/login_button_color"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/logInWithTwitter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_background_button_selector"
+                        android:text="@string/twitter_login"
+                        android:textColor="@color/login_button_color"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/signUpInfo"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/logInWithGoogle"
+                    android:layout_below="@id/googleTwitterButtonContainer"
                     android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:text="@string/dont_have_an_account_yet"

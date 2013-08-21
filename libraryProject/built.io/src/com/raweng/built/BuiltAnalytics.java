@@ -101,9 +101,11 @@ public class BuiltAnalytics {
 	 *  
 	 */
 	public void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -122,7 +124,7 @@ public class BuiltAnalytics {
 			return BuiltAnalyitcsObjects;
 		}else{
 			if(context != null){
-				return new BuiltAnalytics(context);
+				return new BuiltAnalytics(context.getApplicationContext());
 			}else{
 				throw new Exception(BuiltAppConstants.ErrorMessage_ApplicationContextIsNull);
 			}
@@ -334,7 +336,7 @@ public class BuiltAnalytics {
 					}else{
 
 						BuiltError error = new BuiltError();
-						error.errorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
+						error.setErrorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
 
 					}
 					eventJson = new JSONObject();

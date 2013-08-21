@@ -16,7 +16,7 @@ import com.raweng.built.utilities.RawAppUtils;
  * @author raw engineering, Inc
  *
  */
-public class BuiltACL {
+public class BuiltACL{
 
 	private JSONObject userJsonObject 	    = null;
 	private JSONObject roleJsonObject 	    = null;

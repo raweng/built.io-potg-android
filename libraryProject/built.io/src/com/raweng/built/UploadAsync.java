@@ -162,8 +162,8 @@ class UploadAsync extends AsyncTask<java.lang.Object, Integer, Void> implements 
 			request.executeOnExecutor(com.raweng.built.AsyncTask.THREAD_POOL_EXECUTOR, new java.lang.Object[]{});
 		}else {
 			BuiltError error = new BuiltError();
-			error.errorCode(BuiltAppConstants.NONETWORKCONNECTION);
-			error.errorMessage(BuiltAppConstants.ErrorMessage_NoNetwork);
+			error.setErrorCode(BuiltAppConstants.NONETWORKCONNECTION);
+			error.setErrorMessage(BuiltAppConstants.ErrorMessage_NoNetwork);
 			if(callBackObjectForUpload != null){
 				callBackObjectForUpload.onRequestFail(error);
 			}

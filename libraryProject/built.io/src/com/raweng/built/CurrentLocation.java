@@ -193,7 +193,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	private  void throwsException(String error) {
 		if(locationCallbackInstance != null){
 			BuiltError builtError = new BuiltError();
-			builtError.errorMessage(error);
+			builtError.setErrorMessage(error);
 			locationCallbackInstance.onRequestFail(builtError);
 		}
 	}

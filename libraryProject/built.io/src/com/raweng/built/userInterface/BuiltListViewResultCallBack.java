@@ -7,9 +7,9 @@ import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;
 
 /**
- * {@link BuiltListViewProvider} class callback.
+ * {@link BuiltUIListViewController} class callback.
  * 
- * notify class after {@link BuiltListViewProvider} network call executed.
+ * notify class after {@link BuiltUIListViewController} network call executed.
  * 
  * @author raw engineering, Inc
  *

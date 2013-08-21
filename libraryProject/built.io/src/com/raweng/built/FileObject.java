@@ -48,7 +48,7 @@ public class FileObject{
 
 
 	/**
-	 * {@link FileObject} instance.
+	 * Creates new {@link FileObject} instance.
 	 * 
 	 */
 	public FileObject(){
@@ -91,6 +91,7 @@ public class FileObject{
 	public void setHeader(String key, String value){
 
 		if(key != null && value != null){
+			removeHeader(key);
 			headerGroup_local.addHeader(new BasicHeader(key, value));
 		}
 	}
@@ -106,9 +107,11 @@ public class FileObject{
 	 * 
 	 */
 	public  void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -131,7 +134,9 @@ public class FileObject{
 	 * 
 	 */
 	public void setFile(String filePath) {
-		mediaFilePath = filePath;
+		if(filePath != null){
+			mediaFilePath = filePath;
+		}
 	}
 
 	/**
@@ -207,7 +212,7 @@ public class FileObject{
 		if(uploadUid == null){
 			if(callback != null){
 				BuiltError error = new BuiltError();
-				error.errorMessage(BuiltAppConstants.ErrorMessage_UploadUidIsNull);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_UploadUidIsNull);
 				callback.onError(error);
 			}
 		}else{
@@ -239,7 +244,7 @@ public class FileObject{
 		if(uploadUid == null){
 			if(callback != null){
 				BuiltError error = new BuiltError();
-				error.errorMessage(BuiltAppConstants.ErrorMessage_UploadUidIsNull);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_UploadUidIsNull);
 				callback.onRequestFail(error);
 			}
 		}else{
@@ -281,7 +286,7 @@ public class FileObject{
 				}else{
 					if(callback != null){
 						BuiltError error = new BuiltError();
-						error.errorMessage(BuiltAppConstants.ErrorMessage_FilePATHINVALID);
+						error.setErrorMessage(BuiltAppConstants.ErrorMessage_FilePATHINVALID);
 						callback.onError(error);
 					}
 					return this;
@@ -423,7 +428,7 @@ public class FileObject{
 
 	private void throwExeception(BuiltResultCallBack callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}

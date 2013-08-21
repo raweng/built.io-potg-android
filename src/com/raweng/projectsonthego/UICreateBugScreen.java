@@ -44,7 +44,7 @@ import com.raweng.built.BuiltFile;
 import com.raweng.built.BuiltObject;
 import com.raweng.built.BuiltResultCallBack;
 import com.raweng.built.FileObject;
-import com.raweng.built.userInterface.Picker;
+import com.raweng.built.userInterface.BuiltUIPickerController;
 import com.raweng.built.utilities.BuiltUtil;
 import com.raweng.projectsonthego.Models.UserModel;
 import com.raweng.projectsonthego.Utilities.AppSettings;
@@ -94,7 +94,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 	String memberRoleUid = null;
 	String[] assigneesUid;
 
-	Picker picker;
+	BuiltUIPickerController picker;
 
 
 	BuiltFile builtfile = new BuiltFile();
@@ -168,7 +168,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 			@Override
 			public void onClick(View arg0) {
 				Activity activity = UICreateBugScreen.this;
-				picker = new Picker(activity);
+				picker = new BuiltUIPickerController(activity);
 				try {
 					picker.showPicker(true);
 				} catch (Exception e) {
@@ -269,7 +269,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 
 				@Override
 				public void onError(BuiltError error) {
-					AppUtils.showLog(TAG,error.errorMessage());
+					AppUtils.showLog(TAG,error.getErrorMessage());
 				}
 
 				@Override
@@ -502,8 +502,8 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
-				Toast.makeText(context,error.errorCode()+" : "+error.errorMessage(),Toast.LENGTH_LONG).show();
+				AppUtils.showLog(TAG,error.getErrorMessage());
+				Toast.makeText(context,error.getErrorCode()+" : "+error.getErrorMessage(),Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -543,7 +543,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 		String fileName = null;
 
 		//Selected using built picker file manager option.
-		if(requestCode == Picker.PickerResultCode.SELECT_FROM_FILE_SYSTEM_REQUEST_CODE.getValue()){
+		if(requestCode == BuiltUIPickerController.PickerResultCode.SELECT_FROM_FILE_SYSTEM_REQUEST_CODE.getValue()){
 			if(resultCode == RESULT_OK){
 
 				filePath = (String) picker.getFileInfoForMediaFile(data, requestCode).get("filePath");
@@ -556,7 +556,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 			}
 		}
 		//Selected using built picker gallery option.
-		else if(requestCode == Picker.PickerResultCode.SELECT_IMAGE_FROM_GALLERY_REQUEST_CODE.getValue()){
+		else if(requestCode == BuiltUIPickerController.PickerResultCode.SELECT_IMAGE_FROM_GALLERY_REQUEST_CODE.getValue()){
 			if(resultCode == RESULT_OK){
 
 				filePath = (String) picker.getFileInfoForMediaFile(data, requestCode).get("filePath");
@@ -570,7 +570,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 			}
 		}
 		//Selected using built picker camera option.
-		else if(requestCode == Picker.PickerResultCode.CAPTURE_IMAGE_REQUEST_CODE.getValue()){
+		else if(requestCode == BuiltUIPickerController.PickerResultCode.CAPTURE_IMAGE_REQUEST_CODE.getValue()){
 			if(resultCode == RESULT_OK){
 
 				filePath = (String) picker.getFileInfoForMediaFile(data, requestCode).get("filePath");
@@ -583,7 +583,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 			}
 		}
 		//Selected using built picker camera-video option.
-		else if(requestCode == Picker.PickerResultCode.CAPTURE_VIDEO_REQUEST_CODE.getValue()){
+		else if(requestCode == BuiltUIPickerController.PickerResultCode.CAPTURE_VIDEO_REQUEST_CODE.getValue()){
 			if(resultCode == RESULT_OK){
 
 				filePath = (String) picker.getFileInfoForMediaFile(data, requestCode).get("filePath");

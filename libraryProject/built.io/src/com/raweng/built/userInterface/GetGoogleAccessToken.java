@@ -82,12 +82,12 @@ class GetGoogleAccessToken extends AsyncTask<Void, Void, Void>{
 		Message message = new Message();
 		message.what = ERROR_OCCURRED;
 		error = new BuiltError();
-		error.errorMessage(errorMsg);
+		error.setErrorMessage(errorMsg);
 		HashMap<String, Object> setError = new HashMap<String, Object>();
 		setError.put(msg, exceptionObject);
-		error.errors(setError);
+		error.setErrors(setError);
 		if(errorCode != 0){
-			error.errorCode(errorCode);
+			error.setErrorCode(errorCode);
 		}
 		handleSendToken.sendMessage(message);
 	}

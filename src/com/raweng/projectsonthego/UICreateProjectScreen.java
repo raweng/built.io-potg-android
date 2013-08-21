@@ -220,8 +220,8 @@ public class UICreateProjectScreen extends Activity implements IFetchUserList{
 
 							@Override
 							public void onError(BuiltError error) {
-								AppUtils.showLog(TAG,error.errorMessage());
-								AppUtils.showLog("TAG----------",error.errors().toString());
+								AppUtils.showLog(TAG,error.getErrorMessage());
+								AppUtils.showLog("TAG----------",error.getErrors().toString());
 
 							}
 
@@ -235,8 +235,8 @@ public class UICreateProjectScreen extends Activity implements IFetchUserList{
 
 					@Override
 					public void onError(BuiltError error) {
-						AppUtils.showLog(TAG,error.errorMessage());		
-						AppUtils.showLog(TAG,error.errors().toString());
+						AppUtils.showLog(TAG,error.getErrorMessage());		
+						AppUtils.showLog(TAG,error.getErrors().toString());
 					}
 
 					@Override

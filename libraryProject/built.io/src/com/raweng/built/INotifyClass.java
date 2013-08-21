@@ -14,7 +14,7 @@ public interface INotifyClass {
 	
 	public void getResult(Object obj);
 	
-	public void getResultObject(List<java.lang.Object> obj, JSONObject jsonobject);
+	public void getResultObject(List<java.lang.Object> object, JSONObject jsonobject);
 	
 
 }

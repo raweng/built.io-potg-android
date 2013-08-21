@@ -33,6 +33,7 @@ public class Built {
 	protected static String applicationUid ;
 
 
+	private Built(){}
 
 	/**
 	 * Authenticates the api key and application uid of your application.
@@ -123,12 +124,14 @@ public class Built {
 
 					clearCache(context);
 				}else{
+
 					throw new Exception(BuiltAppConstants.ErrorMessage_ApplicationUidIsNull);
 				}
 			}else{
 				throw new Exception(BuiltAppConstants.ErrorMessage_ApplicationApiKeyIsNull);
 			}
 		}else{
+
 			throw new Exception(BuiltAppConstants.ErrorMessage_ApplicationContextIsNull);
 		}
 
@@ -149,7 +152,7 @@ public class Built {
 				headerGroup = new HeaderGroup();
 			}
 			for(int i = 0; i < count; i++){
-				headerGroup.addHeader(headerGroupObject.getAllHeaders()[i]);
+				setHeader(headerGroupObject.getAllHeaders()[i].getName(), headerGroupObject.getAllHeaders()[i].getValue());
 			}
 
 		}
@@ -183,6 +186,7 @@ public class Built {
 			if(headerGroup == null){
 				headerGroup = new HeaderGroup();
 			}
+			removeHeader(key);
 			headerGroup.addHeader(new BasicHeader(key, value));
 		}
 	}

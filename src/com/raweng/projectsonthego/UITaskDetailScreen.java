@@ -155,7 +155,7 @@ public class UITaskDetailScreen extends Activity implements IFetchUserList{
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
+				AppUtils.showLog(TAG,error.getErrorMessage());
 			}
 
 			@Override
@@ -364,8 +364,8 @@ public class UITaskDetailScreen extends Activity implements IFetchUserList{
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
-				Toast.makeText(context, error.errorMessage(), Toast.LENGTH_SHORT).show();
+				AppUtils.showLog(TAG,error.getErrorMessage());
+				Toast.makeText(context, error.getErrorMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -502,8 +502,8 @@ public class UITaskDetailScreen extends Activity implements IFetchUserList{
 
 						@Override
 						public void onError(BuiltError error) {
-							AppUtils.showLog(TAG,error.errorMessage());
-							Toast.makeText(UITaskDetailScreen.this,error.errorCode()+" : "+error.errorMessage(),Toast.LENGTH_LONG).show();
+							AppUtils.showLog(TAG,error.getErrorMessage());
+							Toast.makeText(UITaskDetailScreen.this,error.getErrorCode()+" : "+error.getErrorMessage(),Toast.LENGTH_LONG).show();
 						}
 
 						@Override
@@ -555,7 +555,7 @@ public class UITaskDetailScreen extends Activity implements IFetchUserList{
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
+				AppUtils.showLog(TAG,error.getErrorMessage());
 			}
 
 			@Override

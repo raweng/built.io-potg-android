@@ -301,8 +301,8 @@ public class UICreateMilestoneScreen extends Activity implements IFetchUserList{
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage()+error.toString());
-				Toast.makeText(context,error.errorCode()+" : "+error.errorMessage(),Toast.LENGTH_LONG).show();
+				AppUtils.showLog(TAG,error.getErrorMessage()+error.toString());
+				Toast.makeText(context,error.getErrorCode()+" : "+error.getErrorMessage(),Toast.LENGTH_LONG).show();
 			}
 		});
 

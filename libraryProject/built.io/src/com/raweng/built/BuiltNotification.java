@@ -33,10 +33,11 @@ public class BuiltNotification {
 
 
 	/**
-	 * Create a new instance of {@link BuiltNotification} class.
+	 * Creates new instance of {@link BuiltNotification} class.
 	 * 
 	 */
 	public BuiltNotification(){
+		
 		headerGroup_local = new HeaderGroup();
 	}
 
@@ -72,6 +73,7 @@ public class BuiltNotification {
 	public void setHeader(String key, String value){
 
 		if(key != null && value != null){
+			removeHeader(key);
 			headerGroup_local.addHeader(new BasicHeader(key,value));
 		}
 	}
@@ -86,9 +88,11 @@ public class BuiltNotification {
 	 *  
 	 */
 	public void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -195,7 +199,7 @@ public class BuiltNotification {
 
 	private void throwExeception(ResultCallBack callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}

@@ -64,7 +64,7 @@ public class BuiltQuery implements INotifyClass {
 
 
 	/**
-	 * Initializes and returns a {@link BuiltQuery} instance for a class.
+	 * Creates new {@link BuiltQuery} instance.
 	 * 
 	 * @param classUid
 	 * 				a class uid for which Query has to be made.
@@ -77,13 +77,8 @@ public class BuiltQuery implements INotifyClass {
 		jsonMain       = new JSONObject();
 		queryValueJson = new JSONObject();
 
-		headerGroup_local        = new HeaderGroup();
+		headerGroup_local = new HeaderGroup();
 		defaultCacheTimeInterval = 24 * 60000;
-		/*File cacheDir            = new File(BuiltAppConstants.cacheFolderName);
-		if(! cacheDir.exists()){
-			cacheDir.mkdirs();
-		}*/
-
 		cachePolicyForCall = CachePolicy.IGNORE_CACHE;
 	}
 
@@ -122,6 +117,7 @@ public class BuiltQuery implements INotifyClass {
 	public void setHeader(String key, String value){
 
 		if(key != null && value != null){
+			removeHeader(key);
 			headerGroup_local.addHeader(new BasicHeader(key,value));
 		}
 	}
@@ -136,9 +132,11 @@ public class BuiltQuery implements INotifyClass {
 	 *  
 	 */
 	public void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -1189,7 +1187,7 @@ public class BuiltQuery implements INotifyClass {
 					if(headerAll.size() < 1){
 
 						BuiltError error = new BuiltError();
-						error.errorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
+						error.setErrorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
 						if(callback != null){
 							callback.onRequestFail(error);
 						}
@@ -1375,8 +1373,8 @@ public class BuiltQuery implements INotifyClass {
 				BuiltError error = new BuiltError();
 				HashMap<String, Object> errorHashMap = new HashMap<String, Object>();
 				errorHashMap.put(errorFilterName, errorMesage);
-				error.errors(errorHashMap);
-				error.errorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
+				error.setErrors(errorHashMap);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
 				if(callback != null){
 					callback.onRequestFail(error);
 				}
@@ -1413,7 +1411,7 @@ public class BuiltQuery implements INotifyClass {
 	 * @param cachePolicy cache policy from {@link CachePolicy}.
 	 * 
 	 * <p>
-	 * <b>Note: </b> Default cache policy is set to {@link com.raweng.built.BuiltQuery.CachePolicy #IGNORE_CACHE}.
+	 * <b>Note: </b> Default cache policy is set to {@link com.raweng.built.BuiltQuery.CachePolicy#IGNORE_CACHE}.
 	 * 
 	 */
 	public void setCachePolicy(CachePolicy cachePolicy) {
@@ -1689,8 +1687,8 @@ public class BuiltQuery implements INotifyClass {
 			BuiltError error = new BuiltError();
 			HashMap<String, Object> errorHashMap = new HashMap<String, Object>();
 			errorHashMap.put(errorFilterName, errorMesage);
-			error.errors(errorHashMap);
-			error.errorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
+			error.setErrors(errorHashMap);
+			error.setErrorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
 			if(callback != null){
 				callback.onRequestFail(error);
 			}
@@ -1699,7 +1697,7 @@ public class BuiltQuery implements INotifyClass {
 
 	private void throwExeception(QueryResultsCallBack callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}

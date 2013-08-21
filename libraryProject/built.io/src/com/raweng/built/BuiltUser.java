@@ -13,6 +13,7 @@ import org.apache.http.message.HeaderGroup;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.raweng.built.userInterface.BuiltUILoginController;
 import com.raweng.built.utilities.BuiltAppConstants;
 import com.raweng.built.utilities.BuiltAppConstants.callController;
 import com.raweng.built.utilities.BuiltControllers;
@@ -32,17 +33,6 @@ import com.raweng.built.utilities.RawAppUtils;
 public class BuiltUser implements INotifyClass {
 
 
-	/**
-	 *To fetch twitter access token secret from hash map by using this as hashmap key.
-	 */
-	public static final String TWITTER_ACCESS_TOKEN_SECRET = "twitterAccessTokenSecret";
-	
-	/**
-	 *To fetch twitter access token from hash map by using this as hashmap key.
-	 */
-	public static final String TWITTER_ACCESS_TOKEN = "twitterAccessToken";
-
-	
 	private JSONArray geoLocationArray       = null;
 	private String userUid                   = null;
 
@@ -60,8 +50,10 @@ public class BuiltUser implements INotifyClass {
 	protected String googleAccessToken  				= null;
 	protected HashMap<String, Object> googleAuthData 	= null;
 
+	protected static BuiltUser builtUserInstance = null;
+
 	/**
-	 * Creates a new {@link BuiltUser} object.
+	 * Creates new  instance of {@link BuiltUser} object.
 	 */
 	public BuiltUser(){
 		headerGroup_local = new HeaderGroup();
@@ -100,6 +92,7 @@ public class BuiltUser implements INotifyClass {
 	public void setHeader(String key, String value){
 
 		if(key != null && value != null){
+			removeHeader(key);
 			headerGroup_local.addHeader(new BasicHeader(key,value));
 		}
 	}
@@ -110,9 +103,11 @@ public class BuiltUser implements INotifyClass {
 	 * @param key header key.
 	 */
 	public void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -124,7 +119,7 @@ public class BuiltUser implements INotifyClass {
 	 * @return true , if user is already logged in or had a authtoken else return false.
 	 */
 	public boolean isAuthenticated(){
-		return (authToken == null);
+		return (authToken != null);
 	}
 
 	/**
@@ -171,6 +166,9 @@ public class BuiltUser implements INotifyClass {
 	 * {@link #getLastName()}, {@link #getUserName()}, {@link #getEmailId()} </li>
 	 * 
 	 * <li> You must call createInstallation from {@link BuiltInstallation} class after this method.</li>
+	 * 
+	 * <li> If you want built.io SDK to hold your login response then you must call {@link #saveSession()} method after logged-in. </li>
+	 * 
 	 */
 	public void login(String email, String password, BuiltResultCallBack callback){
 
@@ -200,6 +198,8 @@ public class BuiltUser implements INotifyClass {
 	 * {@link #getLastName()}, {@link #getUserName()}, {@link #getEmailId()} </li>
 	 * 
 	 * <li> You must call createInstallation from {@link BuiltInstallation} class after this method.</li>
+	 * 
+	 *  <li> If you want built.io SDK to hold your login response then you must call {@link #saveSession()} method after logged-in. </li>
 	 */
 	public void loginWithGoogleAuthAccessToken(String accessToken, BuiltResultCallBack callback) {
 
@@ -226,6 +226,8 @@ public class BuiltUser implements INotifyClass {
 	 * {@link #getLastName()}, {@link #getUserName()}, {@link #getEmailId()} </li>
 	 * 
 	 * <li> You must call createInstallation from {@link BuiltInstallation} class after this method. </li>
+	 * 
+	 * <li> If you want built.io SDK to hold your login response then you must call {@link #saveSession()} method after logged-in. </li>
 	 */
 	public void loginWithFacebookAuthAccessToken(String accessToken, BuiltResultCallBack callback) {
 
@@ -261,6 +263,8 @@ public class BuiltUser implements INotifyClass {
 	 * {@link #getLastName()}, {@link #getUserName()}, {@link #getEmailId()} </li>
 	 * 
 	 * <li> You must call createInstallation from {@link BuiltInstallation} class after this method. </li>
+	 * 
+	 * <li> If you want built.io SDK to hold your login response then you must call {@link #saveSession()} method after logged-in. </li>
 	 */
 	public void loginWithTwitterAuthAccessToken(String twitterAccessToken, String twitterAccessTokenSecret, String twitterConsumerKey, String twitterConsumerSecret, BuiltResultCallBack callback) {
 
@@ -295,6 +299,8 @@ public class BuiltUser implements INotifyClass {
 	 * {@link #getLastName()}, {@link #getUserName()}, {@link #getEmailId()} </li>
 	 * 
 	 * <li> You must call createInstallation from {@link BuiltInstallation} class after this method.</li>
+	 * 
+	 * <li> If you want built.io SDK to hold your login response then you must call {@link #saveSession()} method after logged-in. </li>
 	 */
 	public void loginWithtibbrAuthAccessToken(String accessToken, String hostName, BuiltResultCallBack callback) {
 
@@ -310,58 +316,23 @@ public class BuiltUser implements INotifyClass {
 	}
 
 
+
+
 	/**
-	 * Gets the currently logged in user from disk and returns an instance of it.
+	 * This retrieves the currently logged in BuiltUser from memory.
 	 * 
-	 *  
+	 * @return 
+	 * 			{@link BuiltUser} instance.
+	 * 
+	 * <p>
+	 * <b> Note :- </b>
+	 * <li> This method will return logged-in  builtUser if any else, returns null. 
+	 * 
 	 */
-	public static BuiltUser currentUser(){
-		try{
-			JSONObject appKeyJson          = new JSONObject();
-			JSONObject applicationUserJobj = new JSONObject();
-			JSONArray array = new RawAppUtils().getSessionArrayFromSessionFile(new File(BuiltAppConstants.sessionFileName));
+	public static BuiltUser getCurrentUser(){
 
+		return builtUserInstance;
 
-			int count = array.length();
-			for(int i = 0; i < count; i++){
-				String appKey = null;
-				if(applicationKey_local != null){
-					appKey = applicationKey_local;
-				}else{
-					appKey = Built.applicationKey;
-				}
-
-				if(array.get(i).toString().contains(appKey)){
-					JSONObject valueJson = new JSONObject();
-					valueJson = (JSONObject) array.get(i);
-
-					appKeyJson = valueJson.optJSONObject(appKey);
-					applicationUserJobj = appKeyJson.optJSONObject("application_user");
-
-					if(applicationUserJobj != null && applicationUserJobj.length() > 0){
-						BuiltApplicationUserModel model = new BuiltApplicationUserModel(applicationUserJobj,true, false);
-						BuiltUser builtUserObject = new BuiltUser();
-						builtUserObject.json            = applicationUserJobj;
-						builtUserObject.authToken 		= model.authToken;
-						builtUserObject.userName 		= model.userName;
-						builtUserObject.firstName 		= model.firstName;
-						builtUserObject.lastName 		= model.lastName;
-						builtUserObject.email 			= model.email;
-						builtUserObject.setUserUid(model.userUid);
-						builtUserObject.googleAuthData  = model.googleAuthData;
-
-						return builtUserObject;
-					}
-				}else{
-					return null;
-				}
-
-			}
-		}catch (Exception e) {
-			RawAppUtils.showLog("BuiltUser", "-----------------currentUser|"+e);
-			return null;
-		}
-		return null;
 	}
 
 	/**
@@ -394,23 +365,22 @@ public class BuiltUser implements INotifyClass {
 	 * 
 	 * @param userInfo
 	 * 					{@link HashMap} object containing user info .
-                           UserInfo object contains following keys :
-					        <br>
-					        email: required,
-					        <br>
-					        password:required,
-					        <br>
-					        password_confirmation:required,
-					        <br>
-					        username:optional,
-					        <br>
-					        first_name:optional,
-					        <br>
-					        last_name:optional,
-					        <br>
-					        anydata:anyvalue
-					        <br>
-
+	 *                           UserInfo object contains following keys :
+	 *					        <br>
+	 *					        email: required,
+	 *					        <br>
+	 *					        password:required,
+	 *					        <br>
+	 *					        password_confirmation:required,
+	 *					        <br>
+	 *					        username:optional,
+	 *					        <br>
+	 *					        first_name:optional,
+	 *					        <br>
+	 *					        last_name:optional,
+	 *					        <br>
+	 *					        anydata:anyvalue
+	 *
 	 * 
 	 * @param callback
 	 *                 {@link BuiltResultCallBack} object to notify the application when the request has completed.
@@ -771,7 +741,35 @@ public class BuiltUser implements INotifyClass {
 
 	//	***********************************************************
 	/**
-	 * Saves user session
+	 * Saves current logged-in builtUser on disk.
+	 * 
+	 * <p>
+	 * 
+	 * <b> Usage: </b>
+	 * <p font size = 2>
+	 * <pre>
+	 * <code>final BuiltUser user = new BuiltUser();
+	 * user.login("abc@xyz.com", "password",new BuiltResultCallBack() {
+	 *	 
+	 *	 {@literal @}Override
+	 *        public void onSuccess() {
+	 *				try {
+	 *					user.saveSession();
+	 *				} catch(Exception error) {
+	 *					Log.i("SaveSession", "--Error while saving session|" + error);
+	 *				}
+	 *			}
+	 *
+	 *		 {@literal @}Override
+	 *			public void onError(BuiltError error) {
+	 *			}
+	 *
+	 *			 {@literal @}Override
+	 *			public void onAlways() {}
+	 *		});
+	 * </code>
+	 * </pre>
+	 *</p>
 	 * 
 	 * @throws Exception 
 	 */
@@ -832,16 +830,33 @@ public class BuiltUser implements INotifyClass {
 	}
 
 	/**
-	 * To set authtoken to headers for built.io rest calls.
-	 * <br>
-	 * Scope is limited to this object only. 
+	 * To set {@link BuiltUser} instance with a valid session, on memory.
 	 * 
-	 * @param authtoken
-	 * 					authtoken 
+	 * @param builtUser
+	 * 					{@link BuiltUser} instance. 
+	 * 
+	 * <p>
+	 * <b> Note: </b>
+	 * User can use this method with {@link #getSession()};
+	 * For example after restarting app user can fetch current logged-in builtUser using  {@link #getSession()} method and then set retrieved builtUser instance by using this method.
+	 * 
 	 */
-	public void setSession(String authtoken){
+	public static void setCurrentUser(BuiltUser builtUser) throws Exception{
 
-		setHeader("authtoken", authtoken);
+		if(builtUser  != null  && builtUser.authToken != null){
+
+			builtUserInstance = builtUser;
+
+			Built.setHeader("authtoken", (String) builtUserInstance.authToken);
+
+		}else{
+			if(builtUser == null){
+				throw new Exception(BuiltAppConstants.ErrorMessage_BuitUserObjectIsNull);
+			}else{
+				throw new Exception(BuiltAppConstants.ErrorMessage_AuthtokenIsNull);
+			}
+		}
+
 	}
 
 	/**
@@ -890,43 +905,59 @@ public class BuiltUser implements INotifyClass {
 	}
 
 	/**
-	 * Returns {@link BuiltUser} Session.
+	 * To retrieve  {@link BuiltUser} Session from disk.
 	 * 
-	 * @return {@link HashMap} object
+	 * @return {@link BuiltUser} instance.
 	 * 
-	 *
-	 */
-	public HashMap<String, Object> getSession(){
-		try{
+	 * <p>
+	 * <b> Note : </b>
+	 * <li> To retrieve user session, you must call {@link #saveSession()} method after logged-in. </li>
 
-			String applicationKey = applicationKey_local;
-			if(applicationKey == null){
-				applicationKey = Built.applicationKey;
-			}
+	 */
+	public static BuiltUser getSession(){
+
+		try{
+			JSONObject appKeyJson = new JSONObject();
 			JSONArray array = new RawAppUtils().getSessionArrayFromSessionFile(new File(BuiltAppConstants.sessionFileName));
 
+
 			int count = array.length();
+			String appKey = null;
+			if(applicationKey_local != null){
+				appKey = applicationKey_local;
+			}else{
+				appKey = Built.applicationKey;
+			}
+
 			for(int i = 0; i < count; i++){
 
-				if(array.get(i).toString().contains(applicationKey)){
+				if(array.get(i).toString().contains(appKey)){
+					JSONObject valueJson = new JSONObject();
+					valueJson = (JSONObject) array.get(i);
 
-					HashMap< String, Object> returnData = new HashMap<String, Object>();
-					sessionJson = (JSONObject) array.get(i);
+					appKeyJson = valueJson.optJSONObject(appKey);
 
-					if(sessionJson != null){
-						Iterator childKeys = sessionJson.keys();
-						while(childKeys.hasNext()){
-							String childkey = (String) childKeys.next();
-							returnData.put(childkey, sessionJson.get(childkey) == null ? null : sessionJson.get(childkey));
-						}
-						return returnData;
-					}
+					BuiltApplicationUserModel model = new BuiltApplicationUserModel(appKeyJson);
+					BuiltUser builtUserObject = new BuiltUser();
+					builtUserObject.json            = appKeyJson;
+					builtUserObject.authToken 		= model.authToken;
+					builtUserObject.userName 		= model.userName;
+					builtUserObject.firstName 		= model.firstName;
+					builtUserObject.lastName 		= model.lastName;
+					builtUserObject.email 			= model.email;
+					builtUserObject.setUserUid(model.userUid);
+					builtUserObject.googleAuthData  = model.googleAuthData;
+
+					return builtUserObject;
 				}
+
 			}
 		}catch (Exception e) {
 			RawAppUtils.showLog("BuiltUser", "-----------------getSession|"+e);
+			return null;
 		}
 		return null;
+
 	}
 
 	/**
@@ -1025,50 +1056,47 @@ public class BuiltUser implements INotifyClass {
 	/**
 	 * Returns  {@link BuiltUser}&#39;s google login response data. 
 	 */
-	public HashMap<String, Object> getGoogleAuthData() {
+	private HashMap<String, Object> getGoogleAuthData() {
 		return googleAuthData;
 	}
 
 	/**
-	 *Returns twitter access token and access token secret.  
-	 * Keys used to fetch values of hashmap can be accessed by:
-	 * {@link #TWITTER_ACCESS_TOKEN} , {@link #TWITTER_ACCESS_TOKEN_SECRET}
+	 *Returns twitter access token in in {@link BuiltUILoginController} success override method.   
 	 * 
-	 * <br><b>Example</b>
+	 *<br><b>Example</b>
 	 * 
-	 * <pre class="prettyprint">
-	 *<br>&#160;&#160;&#160;&#160;  BuiltLogin builtLogin = new BuiltLogin(context);
-	 *<br>&#160;&#160;&#160;&#160;  builtLogin.loginWithTwitter(new BuiltAuthResultCallBack() {
-	 *
-	 *<br>&#160;&#160;&#160;&#160;	@Override
-	 *<br>&#160;&#160;&#160;&#160;	public void onSuccess(BuiltUser user) {
-	 *<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; HashMap map = user.getTwitterOAuthToken();
-	 *<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; map.get(user.TWITTER_ACCESS_TOKEN);
-	 *<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; map.get(user.TWITTER_ACCESS_TOKEN_SECRET);
+	 *<pre class="prettyprint">
+	 *<br>&#160;&#160;&#160;&#160;@Override
+	 *<br>&#160;&#160;&#160;&#160;public void loginSuccess(BuiltUser user) {
+	 *<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; String twitterAccessToken = user.getTwitterAccessToken();
 	 *
 	 *<br>&#160;&#160;&#160;&#160;	}
 	 *
-	 *<br>&#160;&#160;&#160;&#160;  @Override
-	 *<br>&#160;&#160;&#160;&#160;	public void onError(BuiltError error) {
-	 *<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; //Error block					
+	 *</pre>
+	 */
+	public String getTwitterAccessToken(){
+
+		return BuiltAppConstants.TWITTER_ACCESS_TOKEN;
+	}
+
+	/**
+	 *Returns twitter access token secret in {@link BuiltUILoginController} success override method.   
+	 * 
+	 * <br><b>Example</b>
+	 * 
+	 *<pre class="prettyprint">
+	 *<br>&#160;&#160;&#160;&#160;@Override
+	 *<br>&#160;&#160;&#160;&#160;public void loginSuccess(BuiltUser user) {
+	 *<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; String twitterAccessTokenSecret = user.getTwitterAccessTokenSecret();
 	 *
-	 *<br>&#160;&#160;&#160;&#160;  }
-	 *
-	 *<br>&#160;&#160;&#160;&#160;  @Override
-	 *<br>&#160;&#160;&#160;&#160;  public void onAlways() {
-	 *<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; //Always executed after on success and on error.
-	 *<br>&#160;&#160;&#160;&#160;  }
-	 *<br>&#160;&#160;&#160;&#160;  });
+	 *<br>&#160;&#160;&#160;&#160;	}
 	 *
 	 *</pre>
 	 */
-	public HashMap<String, Object> getTwitterOAuthToken(){
-		HashMap< String, Object> returnData = new HashMap<String, Object>();
-		returnData.put(TWITTER_ACCESS_TOKEN, BuiltAppConstants.TWITTER_ACCESS_TOKEN);
-		returnData.put(TWITTER_ACCESS_TOKEN_SECRET, BuiltAppConstants.TWITTER_ACCESS_TOKEN_SECRET);
-		return returnData;
-	}
+	public String getTwitterAccessTokenSecret(){
 
+		return  BuiltAppConstants.TWITTER_ACCESS_TOKEN_SECRET;
+	}
 
 	/**
 	 * To cancel all {@link BuiltUser} network calls.
@@ -1153,9 +1181,20 @@ public class BuiltUser implements INotifyClass {
 	 * Google oauth 2.0 access token from google used to log a user into your application.
 	 * Access token is short lived, it will get expired in sometime.
 	 * 
+	 * Returns google access token in {@link BuiltUILoginController} success override method. 
 	 * @return
 	 * 			google oauth 2.0 access token.
-	 * 			
+	 * 
+	 *<br><b>Example</b>
+	 * 
+	 *<pre class="prettyprint">
+	 *<br>&#160;&#160;&#160;&#160;@Override
+	 *<br>&#160;&#160;&#160;&#160;public void loginSuccess(BuiltUser user) {
+	 *<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; String googleAccessToken = user.getGoogleAccessToken();
+	 *
+	 *<br>&#160;&#160;&#160;&#160;	}
+	 *
+	 *</pre>
 	 */
 	public String getGoogleAccessToken(){
 
@@ -1169,11 +1208,12 @@ public class BuiltUser implements INotifyClass {
 	 *************************************/
 
 	@Override
-	public void getResult(java.lang.Object obj) {
-		if(obj != null){ // login call
+	public void getResult(java.lang.Object object) {
+		if(object != null){ // login call
 
-			authToken = (String) obj;
-			Built.setHeader("authtoken", (String) obj);
+			authToken = (String) object;
+			Built.setHeader("authtoken", (String) object);
+			builtUserInstance = this;
 
 		}else{ // logged - out call 
 
@@ -1182,6 +1222,7 @@ public class BuiltUser implements INotifyClass {
 				headerGroup_local.removeHeader(header);
 			}
 			Built.removeHeader("authtoken");
+			builtUserInstance = null;
 			authToken = null;
 			try {
 				clearSession();
@@ -1423,7 +1464,7 @@ public class BuiltUser implements INotifyClass {
 
 	private void throwExeception(ResultCallBack callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}

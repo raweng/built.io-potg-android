@@ -77,7 +77,6 @@ public class BuiltLocation{
 	 */
 	public static void getCurrentLocation(Context context, Activity activity, BuiltLocationCallback callback) throws Exception{
 
-
 		if(context == null){
 
 			throwsException(callback, BuiltAppConstants.ErrorMessage_ApplicationContextIsNull);
@@ -98,7 +97,7 @@ public class BuiltLocation{
 	private static void throwsException(BuiltLocationCallback callback, String error) {
 		if(callback != null){
 			BuiltError builtError = new BuiltError();
-			builtError.errorMessage(error);
+			builtError.setErrorMessage(error);
 			callback.onRequestFail(builtError);
 		}
 	}

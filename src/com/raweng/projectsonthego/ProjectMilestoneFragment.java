@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;
-import com.raweng.built.userInterface.BuiltListViewProvider;
 import com.raweng.built.userInterface.BuiltListViewResultCallBack;
+import com.raweng.built.userInterface.BuiltUIListViewController;
 import com.raweng.projectsonthego.Utilities.AppConstant;
 import com.raweng.projectsonthego.Utilities.AppSettings;
 import com.raweng.projectsonthego.Utilities.AppUtils;
@@ -32,7 +32,7 @@ public class ProjectMilestoneFragment extends Fragment {
 
 	private final int CREATE_MILESTONE_REQUEST_CODE = 5000; 
 	private final int DELETE_MILESTONE_REQUEST_CODE = 5001;
-	private BuiltListViewProvider listView;
+	private BuiltUIListViewController listView;
 	private final String TAG = "ProjectMilestoneFragment";
 	private String membersRoleUid;
 	private String moderatorsRoleUid;
@@ -49,7 +49,7 @@ public class ProjectMilestoneFragment extends Fragment {
 		this.setHasOptionsMenu(true);
 
 		//Initialize BuiltListViewProvider instance using context and CLASSUID.
-		listView = new BuiltListViewProvider(getActivity(), CLASSUID);
+		listView = new BuiltUIListViewController(getActivity(), CLASSUID);
 
 
 		getActivity().setTitle(menuName);
@@ -129,7 +129,7 @@ public class ProjectMilestoneFragment extends Fragment {
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG, error.errorMessage());
+				AppUtils.showLog(TAG, error.getErrorMessage());
 				
 			}
 		});

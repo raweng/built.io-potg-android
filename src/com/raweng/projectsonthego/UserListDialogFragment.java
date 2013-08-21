@@ -121,8 +121,8 @@ public class UserListDialogFragment extends DialogFragment implements OnEditorAc
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(""+error.errorCode(), ""+error.errorMessage());
-				Toast.makeText(getActivity(),error.errorCode()+""+error.errorMessage(),Toast.LENGTH_LONG).show();
+				AppUtils.showLog(""+error.getErrorCode(), ""+error.getErrorMessage());
+				Toast.makeText(getActivity(),error.getErrorCode()+""+error.getErrorMessage(),Toast.LENGTH_LONG).show();
 			}
 
 			@Override

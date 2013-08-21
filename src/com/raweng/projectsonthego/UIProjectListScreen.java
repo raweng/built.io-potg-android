@@ -20,8 +20,8 @@ import com.raweng.built.BuiltResultCallBack;
 import com.raweng.built.BuiltRole;
 import com.raweng.built.BuiltUser;
 import com.raweng.built.RoleObject;
-import com.raweng.built.userInterface.BuiltListViewProvider;
 import com.raweng.built.userInterface.BuiltListViewResultCallBack;
+import com.raweng.built.userInterface.BuiltUIListViewController;
 import com.raweng.projectsonthego.Utilities.AppConstant;
 import com.raweng.projectsonthego.Utilities.AppSettings;
 import com.raweng.projectsonthego.Utilities.AppUtils;
@@ -42,7 +42,7 @@ public class UIProjectListScreen extends Fragment {
 	String menuUID; // project UID 
 
 	ProgressDialog progressDialog;
-	BuiltListViewProvider listView;
+	BuiltUIListViewController listView;
 	private final String TAG = "UIProjectListScreen";
 
 	public UIProjectListScreen() {
@@ -66,7 +66,7 @@ public class UIProjectListScreen extends Fragment {
 		progressDialog.show();
 
 		//Intialize BuiltListViewProvider instance.
-		listView = new BuiltListViewProvider(getActivity(), "project");
+		listView = new BuiltUIListViewController(getActivity(), "project");
 
 		//Make a call for load project list.
 		listView.loadData(new BuiltListViewResultCallBack() {
@@ -97,7 +97,7 @@ public class UIProjectListScreen extends Fragment {
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
+				AppUtils.showLog(TAG,error.getErrorMessage());
 				Toast.makeText(getActivity(), R.string.oops_something_went_wrong, Toast.LENGTH_SHORT).show();
 			}
 
@@ -162,11 +162,11 @@ public class UIProjectListScreen extends Fragment {
 			public void onSuccess() {
 
 				//Create a built user object.
-				BuiltUser user = new BuiltUser();
+				BuiltUser user;
 				String uid = null;
 
 				//Get logged in user.
-				user =  BuiltUser.currentUser();
+				user =  BuiltUser.getSession();
 				if(user != null && user.getUserUid() != null){
 					uid = user.getUserUid();
 				}
@@ -218,7 +218,7 @@ public class UIProjectListScreen extends Fragment {
 			}
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
+				AppUtils.showLog(TAG,error.getErrorMessage());
 			}
 
 			@Override

@@ -250,7 +250,7 @@ public class URLConnectionRequest extends AsyncTask<java.lang.Object, java.lang.
 		}else if((request.getController().toString().equalsIgnoreCase(BuiltControllers.LOGIN))
 				||(request.getController().toString().equalsIgnoreCase(BuiltControllers.REGISTER))){
 
-			BuiltApplicationUserModel model = new BuiltApplicationUserModel(responseJSON, false, false);
+			BuiltApplicationUserModel model = new BuiltApplicationUserModel(responseJSON);
 			builtUserObject.json            = responseJSON;
 			builtUserObject.authToken 		= model.authToken;
 			builtUserObject.userName 		= model.userName;
@@ -268,7 +268,7 @@ public class URLConnectionRequest extends AsyncTask<java.lang.Object, java.lang.
 
 		}else if(request.getController().toString().equalsIgnoreCase(BuiltControllers.CHECKAPPLICATIONUSERPROFILE)){
 
-			BuiltApplicationUserModel model = new BuiltApplicationUserModel(responseJSON, false, false);
+			BuiltApplicationUserModel model = new BuiltApplicationUserModel(responseJSON);
 			builtUserObject.json            = responseJSON;
 			builtUserObject.authToken 		= model.authToken;
 			builtUserObject.userName 		= model.userName;
@@ -352,7 +352,7 @@ public class URLConnectionRequest extends AsyncTask<java.lang.Object, java.lang.
 				}
 
 				BuiltError error = new BuiltError();
-				error.errorMessage(BuiltAppConstants.ErrorMessage_InstallationResponse);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_InstallationResponse);
 				if(request.getCallBackObject() != null){
 					((BuiltResultCallBack) request.getCallBackObject()).onRequestFail(error);
 				}
@@ -492,7 +492,7 @@ public class URLConnectionRequest extends AsyncTask<java.lang.Object, java.lang.
 				}
 			}
 			if(builtFileInstance != null){
-				
+
 				if(responseJSON.has("count")){
 					builtFileInstance.count = responseJSON.optInt("count");
 				}
@@ -521,6 +521,11 @@ public class URLConnectionRequest extends AsyncTask<java.lang.Object, java.lang.
 				((BuildUserResultCallback) request.getCallBackObject()).onRequestFinish(responseJSON.optString("uid"));
 			}
 
+		}else if(request.getController().toString().equalsIgnoreCase(BuiltControllers.CLOUDCALL)){
+
+			if(request.getCallBackObject() != null){
+				((BuiltExtensionCallback) request.getCallBackObject()).onRequestFinish(responseJSON);
+			}
 
 		}else{
 			if(request.getCallBackObject() != null){
@@ -570,10 +575,10 @@ public class URLConnectionRequest extends AsyncTask<java.lang.Object, java.lang.
 			file.close();
 		}catch (Exception e) {
 			BuiltError error = new BuiltError();
-			error.errorMessage(BuiltAppConstants.ErrorMessage_SavingNetworkCallResponseForCache);
+			error.setErrorMessage(BuiltAppConstants.ErrorMessage_SavingNetworkCallResponseForCache);
 			HashMap<String, Object> hashMap = new HashMap<String, Object>();
 			hashMap.put("error", e);
-			error.errors(hashMap);
+			error.setErrors(hashMap);
 			if(callBackObject != null){
 				callBackObject.onRequestFail(error);
 			}
@@ -632,9 +637,9 @@ public class URLConnectionRequest extends AsyncTask<java.lang.Object, java.lang.
 		if(errorMessage == null){
 			errorMessage = BuiltAppConstants.ErrorMessage_Default;
 		}
-		errorObject.errorCode(errorCode);
-		errorObject.errorMessage(errorMessage);
-		errorObject.errors(resultHashMap);
+		errorObject.setErrorCode(errorCode);
+		errorObject.setErrorMessage(errorMessage);
+		errorObject.setErrors(resultHashMap);
 		handler.sendMessage(msg);
 	}
 

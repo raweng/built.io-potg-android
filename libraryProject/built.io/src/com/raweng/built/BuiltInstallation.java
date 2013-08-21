@@ -24,7 +24,6 @@ import com.raweng.built.utilities.RawAppUtils;
  */
 public class BuiltInstallation {
 
-
 	protected String deviceType = null;
 	protected String deviceToken = null;
 	protected ArrayList<String> subscribedChannelList = null; 
@@ -81,6 +80,7 @@ public class BuiltInstallation {
 	public void setHeader(String key, String value){
 
 		if(key != null && value != null){
+			removeHeader(key);
 			headerGroup_local.addHeader(new BasicHeader(key,value));
 		}
 	}
@@ -95,9 +95,11 @@ public class BuiltInstallation {
 	 *  
 	 */
 	public void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -113,7 +115,7 @@ public class BuiltInstallation {
 	 * @param installationChannels
 	 * 				channels subscribe to. Channels can have the values below:
 	 * 
-	 *<pre class="prettyprint">
+	 *<pre>
 	 *<i>//To notify when new class in an application with api key &#60;application_api_key&#62; is created created.</i>
 	 *<b> &#60;application_api_key&#62;&#46;class&#46;create </b> 
 	 *
@@ -121,13 +123,13 @@ public class BuiltInstallation {
 	 *<b> &#60;application_api_key&#62;&#46;&#60;class_uid&#62;&#46;object&#46;create </b> 
 	 *
 	 *<i>//To notify when class with given &#60;class_uid&#62; in an application with api key &#60;application_api_key&#62; is updated.</i>
-	 *<b> &#60;application_api_key&#62;&#46;&#60;class_uid&#62;&#46update </b> 
+	 *<b> &#60;application_api_key&#62;&#46;&#60;class_uid&#62;&#46;update </b> 
 	 *
 	 *<i>//To notify when object with given &#60;object_uid&#62; of &#60;class_uid&#62; in an application with api key &#60;application_api_key&#62; is updated.</i>
 	 *<b> &#60;application_api_key&#62;&#46;&#60;class_uid&#62;&#46;&#60;object_uid&#62;&#46;update </b> 
 	 *
 	 *<i>//To notify when class with given &#60;class_uid&#62; in an application with api key &#60;application_api_key&#62; is deleted.</i>
-	 *<b> &#60;application_api_key&#62;&#46;&#60;class_uid&#62;&#46delete </b> 
+	 *<b> &#60;application_api_key&#62;&#46;&#60;class_uid&#62;&#46;delete </b> 
 	 *
 	 *<i>//To notify when object with given &#60;object_uid&#62; of &#60;class_uid&#62; in an application with api key &#60;application_api_key&#62; is deleted.</i>
 	 *<b> &#60;application_api_key&#62;&#46;&#60;class_uid&#62;&#46;&#60;object_uid&#62;&#46;delete </b> 
@@ -629,7 +631,7 @@ public class BuiltInstallation {
 
 	private void throwExeception(BuiltResultCallBack callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}

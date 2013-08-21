@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;
-import com.raweng.built.userInterface.BuiltListViewProvider;
 import com.raweng.built.userInterface.BuiltListViewResultCallBack;
+import com.raweng.built.userInterface.BuiltUIListViewController;
 import com.raweng.projectsonthego.Utilities.AppUtils;
 import com.raweng.projectsonthego.ViewHolders.BugViewHolder;
 
@@ -30,7 +30,7 @@ public class ProjectBugFragment extends Fragment{
 	private static final String TAG = "ProjectBugFragment";
 	private static final String CLASSUID = "bugs";
 	private String menuUID; // project UID 
-	private BuiltListViewProvider listView;
+	private BuiltUIListViewController listView;
 	private String moderatorRoleUid;
 	private String memberRoleUid;
 
@@ -47,7 +47,7 @@ public class ProjectBugFragment extends Fragment{
 
 
 		//Initialize BuiltListViewProvider instance using context and classuid.
-		listView = new BuiltListViewProvider(getActivity(), CLASSUID);
+		listView = new BuiltUIListViewController(getActivity(), CLASSUID);
 
 		getActivity().setTitle(menuName);
 
@@ -139,7 +139,7 @@ public class ProjectBugFragment extends Fragment{
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
+				AppUtils.showLog(TAG,error.getErrorMessage());
 
 			}
 		});

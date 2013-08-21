@@ -197,7 +197,7 @@ public class UICreateTaskScreen extends Activity implements IFetchUserList{
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
+				AppUtils.showLog(TAG,error.getErrorMessage());
 			}
 
 			@Override

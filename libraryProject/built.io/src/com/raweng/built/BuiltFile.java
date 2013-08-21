@@ -44,8 +44,9 @@ public class BuiltFile implements INotifyUploadDone{
 	private boolean isCallToFetch	= true;
 
 	protected JSONObject json = null;
+	
 	/**
-	 * {@link BuiltFile} instance.
+	 * Creates new {@link BuiltFile} instance.
 	 */
 	public BuiltFile(){
 		headerGroup_local   = new HeaderGroup();
@@ -54,11 +55,11 @@ public class BuiltFile implements INotifyUploadDone{
 		mainJson 			= new JSONObject();
 	}
 
-	
+
 	protected int totalCount = 0;
 	protected int count      = 0;
-	
-	
+
+
 
 	/**
 	 *  Sets the api Key and Application uid for BuiltFile class instance.
@@ -93,6 +94,7 @@ public class BuiltFile implements INotifyUploadDone{
 	public void setHeader(String key, String value){
 
 		if(key != null && value != null){
+			removeHeader(key);
 			headerGroup_local.addHeader(new BasicHeader(key, value));
 		}
 	}
@@ -107,9 +109,11 @@ public class BuiltFile implements INotifyUploadDone{
 	 *  
 	 */
 	public void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -218,7 +222,7 @@ public class BuiltFile implements INotifyUploadDone{
 		if(BuiltAppConstants.isNetworkAvailable){
 			if(uploadFile.size() < 1){
 				BuiltError error = new BuiltError();
-				error.errorMessage(BuiltAppConstants.ErrorMessage_NoFileToUpload);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_NoFileToUpload);
 				if(callback != null){
 					callback.onRequestFail(error);
 				}
@@ -248,7 +252,7 @@ public class BuiltFile implements INotifyUploadDone{
 						}else{
 
 							BuiltError error = new BuiltError();
-							error.errorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
+							error.setErrorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
 							if(callback != null){
 								callback.onRequestFail(error);
 							}
@@ -256,7 +260,7 @@ public class BuiltFile implements INotifyUploadDone{
 					}else{
 
 						BuiltError error = new BuiltError();
-						error.errorMessage(BuiltAppConstants.ErrorMessage_FilePATHINVALID);
+						error.setErrorMessage(BuiltAppConstants.ErrorMessage_FilePATHINVALID);
 						if(callback != null){
 							callback.onRequestFail(error);
 						}
@@ -265,8 +269,8 @@ public class BuiltFile implements INotifyUploadDone{
 			}
 		}else{
 			BuiltError error = new BuiltError();
-			error.errorCode(BuiltAppConstants.NONETWORKCONNECTION);
-			error.errorMessage(BuiltAppConstants.ErrorMessage_NoNetwork);
+			error.setErrorCode(BuiltAppConstants.NONETWORKCONNECTION);
+			error.setErrorMessage(BuiltAppConstants.ErrorMessage_NoNetwork);
 			if(buildFileResultCallback != null){
 				buildFileResultCallback.onRequestFail(error);
 			}
@@ -285,8 +289,9 @@ public class BuiltFile implements INotifyUploadDone{
 	 * 			
 	 */
 	public void addFile(String key, FileObject fileObject){
-
-		uploadFile.put(key, fileObject);
+		if(key != null && fileObject != null){
+			uploadFile.put(key, fileObject);
+		}
 	}
 
 	/**
@@ -311,8 +316,8 @@ public class BuiltFile implements INotifyUploadDone{
 				BuiltError error = new BuiltError();
 				HashMap<String, Object> errorHashMap = new HashMap<String, Object>();
 				errorHashMap.put(errorFilterName, errorMesage);
-				error.errors(errorHashMap);
-				error.errorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
+				error.setErrors(errorHashMap);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
 				if(callback != null){
 					callback.onRequestFail(error);
 				}
@@ -347,8 +352,8 @@ public class BuiltFile implements INotifyUploadDone{
 				BuiltError error = new BuiltError();
 				HashMap<String, Object> errorHashMap = new HashMap<String, Object>();
 				errorHashMap.put(errorFilterName, errorMesage);
-				error.errors(errorHashMap);
-				error.errorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
+				error.setErrors(errorHashMap);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
 				if(callback != null){
 					callback.onRequestFail(error);
 				}
@@ -383,8 +388,8 @@ public class BuiltFile implements INotifyUploadDone{
 				BuiltError error = new BuiltError();
 				HashMap<String, Object> errorHashMap = new HashMap<String, Object>();
 				errorHashMap.put(errorFilterName, errorMesage);
-				error.errors(errorHashMap);
-				error.errorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
+				error.setErrors(errorHashMap);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_JsonNotProper);
 				if(callback != null){
 					callback.onRequestFail(error);
 				}
@@ -394,7 +399,7 @@ public class BuiltFile implements INotifyUploadDone{
 		}
 		return this;
 	}
-	
+
 	/**
 	 * Count of all objects in a class.if {@link #count()} is called.
 	 * 
@@ -405,7 +410,7 @@ public class BuiltFile implements INotifyUploadDone{
 		return totalCount;
 	}
 
-	
+
 	/**
 	 * Object count that match the given conditions. if {@link #includeCount()} is called.
 	 * 
@@ -415,7 +420,7 @@ public class BuiltFile implements INotifyUploadDone{
 	public int getCount() {
 		return count;
 	}
-	
+
 	/**
 	 * 
 	 * Returns JSON representation of this {@link BuiltFile} instance data.
@@ -480,7 +485,7 @@ public class BuiltFile implements INotifyUploadDone{
 
 	private void throwExeception(BuildFilesResultCallback callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}

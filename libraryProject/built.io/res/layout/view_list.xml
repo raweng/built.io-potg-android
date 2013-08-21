@@ -3,7 +3,7 @@
     android:id="@+id/relativeBlog"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".BuiltListViewProvider" >
+    tools:context=".BuiltUIListViewController" >
 
     <RelativeLayout
         android:id="@+id/listviewContainer"

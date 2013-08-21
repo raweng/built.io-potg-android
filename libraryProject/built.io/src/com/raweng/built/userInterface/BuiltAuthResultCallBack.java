@@ -4,9 +4,9 @@ import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltUser;
 
 /**
- * {@link BuiltLogin} and {@link BuiltSignUp} class callback.
+ * {@link BuiltUILoginController} and {@link BuiltUISignUpController} class callback.
  * 
- * Notify class after {@link BuiltLogin} and {@link BuiltSignUp} network calls has been executed.
+ * Notify class after {@link BuiltUILoginController} and {@link BuiltUISignUpController} network calls has been executed.
  * 
  * @author raw engineering, Inc
  *

@@ -184,7 +184,7 @@ public class UIBugDetailScreen extends FragmentActivity implements IFetchUserLis
 			}
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG, error.errorMessage());
+				AppUtils.showLog(TAG, error.getErrorMessage());
 			}
 
 			@Override
@@ -464,8 +464,8 @@ public class UIBugDetailScreen extends FragmentActivity implements IFetchUserLis
 						@Override
 						public void onError(BuiltError error) {
 
-							AppUtils.showLog(TAG,error.errorMessage());
-							Toast.makeText(context,error.errorCode()+" : "+error.errorMessage(),Toast.LENGTH_LONG).show();
+							AppUtils.showLog(TAG,error.getErrorMessage());
+							Toast.makeText(context,error.getErrorCode()+" : "+error.getErrorMessage(),Toast.LENGTH_LONG).show();
 						}
 
 						@Override
@@ -658,8 +658,8 @@ public class UIBugDetailScreen extends FragmentActivity implements IFetchUserLis
 
 					@Override
 					public void onError(BuiltError error) {
-						AppUtils.showLog(TAG,error.errorMessage());
-						Toast.makeText(context,error.errorCode()+""+error.errorMessage(),Toast.LENGTH_LONG).show();
+						AppUtils.showLog(TAG,error.getErrorMessage());
+						Toast.makeText(context,error.getErrorCode()+""+error.getErrorMessage(),Toast.LENGTH_LONG).show();
 					}
 
 					@Override
@@ -696,20 +696,22 @@ public class UIBugDetailScreen extends FragmentActivity implements IFetchUserLis
 		//Verify user type for admin, moderator or user present in assignees to allow permission for update bug.
 		if(userType.equalsIgnoreCase(AppConstant.userRole.admin.toString()) || userType.equalsIgnoreCase(AppConstant.userRole.moderator.toString())){
 			isUserFromAssignees = true;
-		}else if(assigneeUid != null){
+		}
+		
+		if(assigneeUid != null){
 			for(int i=0; i<assigneeUid.length; i++){
 				if(assigneeUid[i].equalsIgnoreCase(loginUserUid)){
 					isUserFromAssignees = true;
 				}
 			}
-		}else if(createrUid != null){
+		}
+
+		if(createrUid != null){
 			if(createrUid.equalsIgnoreCase(loginUserUid)){
 				isUserFromAssignees = true;
 			}
-		}else{
-			isUserFromAssignees = false;
 		}
-
+		
 		if(!isUserFromAssignees){
 			updateMenu.setVisible(false);
 		}
@@ -744,7 +746,7 @@ public class UIBugDetailScreen extends FragmentActivity implements IFetchUserLis
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
+				AppUtils.showLog(TAG,error.getErrorMessage());
 			}
 
 			@Override

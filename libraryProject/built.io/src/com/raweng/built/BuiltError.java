@@ -3,7 +3,7 @@ package com.raweng.built;
 import java.util.HashMap;
 
 /**
- *To retrieve information related to network call failure.
+ * To retrieve information related to network call failure.
  *
  * @author  raw engineering, Inc
  */
@@ -17,7 +17,7 @@ public class BuiltError {
 	 * Returns error code.
 	 * @return int value.
 	 */
-	public int errorCode() {
+	public int getErrorCode() {
 		return errorCode;
 	}
 
@@ -27,7 +27,7 @@ public class BuiltError {
 	 * @param errorCode
 	 * 						error code provided by built.io server.
 	 */
-	public void errorCode(int errorCode) {
+	public void setErrorCode(int errorCode) {
 		this.errorCode = errorCode;
 	}
 
@@ -35,7 +35,7 @@ public class BuiltError {
 	 * 
 	 * Returns error in string format.
 	 */
-	public String errorMessage() {
+	public String getErrorMessage() {
 		return errorMessage;
 	}
 
@@ -46,7 +46,7 @@ public class BuiltError {
 	 * 						error message.
 	 * 			
 	 */
-	public void errorMessage(String errorMessage) {
+	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 
@@ -54,7 +54,7 @@ public class BuiltError {
 	 * 
 	 * Returns error in {@linkplain HashMap} format where error is key and its respective information as HashMap&#39;s value.
 	 */
-	public HashMap<String, Object> errors() {
+	public HashMap<String, Object> getErrors() {
 		return error;
 	}
 
@@ -64,7 +64,7 @@ public class BuiltError {
 	 * @param error
 	 * 				{@link HashMap} object. 
 	 */
-	public void errors(HashMap<String, Object> error) {
+	public void setErrors(HashMap<String, Object> error) {
 		this.error = error;
 	}
 }

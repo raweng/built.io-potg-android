@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.raweng.built.BuiltError;
 import com.raweng.built.BuiltObject;
-import com.raweng.built.userInterface.BuiltListViewProvider;
 import com.raweng.built.userInterface.BuiltListViewResultCallBack;
+import com.raweng.built.userInterface.BuiltUIListViewController;
 import com.raweng.projectsonthego.Utilities.AppConstant;
 import com.raweng.projectsonthego.Utilities.AppSettings;
 import com.raweng.projectsonthego.Utilities.AppUtils;
@@ -37,7 +37,7 @@ public class ProjectTaskFragment extends Fragment {
 	private String menuUID; // project UID 
 	private final int CREATE_TASK_REQUEST_CODE = 5000;
 	private final int DELETE_TASK_REQUEST_CODE = 5001;
-	private BuiltListViewProvider listView;
+	private BuiltUIListViewController listView;
 	private final String TAG = "ProjectTaskFragment";
 	private String membersRoleUid;
 	private String moderatorsRoleUid;
@@ -60,7 +60,7 @@ public class ProjectTaskFragment extends Fragment {
 		}
 
 		//Initialize BuiltListViewProvider instance using context and class uid.
-		listView = new BuiltListViewProvider(getActivity(), CLASSUID);
+		listView = new BuiltUIListViewController(getActivity(), CLASSUID);
 		ProgressDialog progress = new ProgressDialog(getActivity());
 		progress.setMessage(getActivity().getString(R.string.loading_task_list));
 		listView.setProgressDialog(progress);
@@ -128,7 +128,7 @@ public class ProjectTaskFragment extends Fragment {
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG, error.errorMessage());
+				AppUtils.showLog(TAG, error.getErrorMessage());
 			}
 
 			@Override

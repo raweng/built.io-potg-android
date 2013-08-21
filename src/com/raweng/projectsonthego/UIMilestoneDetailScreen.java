@@ -162,8 +162,8 @@ public class UIMilestoneDetailScreen extends Activity implements IFetchUserList{
 
 			@Override
 			public void onError(BuiltError error) {
-				Toast.makeText(context,error.errorCode()+""+error.errorMessage(),Toast.LENGTH_LONG).show();
-				AppUtils.showLog(TAG, error.errorMessage());
+				Toast.makeText(context,error.getErrorCode()+""+error.getErrorMessage(),Toast.LENGTH_LONG).show();
+				AppUtils.showLog(TAG, error.getErrorMessage());
 			}
 
 			@Override
@@ -331,7 +331,7 @@ public class UIMilestoneDetailScreen extends Activity implements IFetchUserList{
 
 			@Override
 			public void onError(BuiltError error) {
-				Toast.makeText(context,error.errorCode()+" : "+error.errorMessage(),Toast.LENGTH_LONG).show();
+				Toast.makeText(context,error.getErrorCode()+" : "+error.getErrorMessage(),Toast.LENGTH_LONG).show();
 			}
 		});
 
@@ -558,7 +558,7 @@ public class UIMilestoneDetailScreen extends Activity implements IFetchUserList{
 
 						@Override
 						public void onError(BuiltError error) {
-							Toast.makeText(context,error.errorCode()+" : "+error.errorMessage(),Toast.LENGTH_LONG).show();
+							Toast.makeText(context,error.getErrorCode()+" : "+error.getErrorMessage(),Toast.LENGTH_LONG).show();
 						}
 
 						@Override
@@ -611,7 +611,7 @@ public class UIMilestoneDetailScreen extends Activity implements IFetchUserList{
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG, error.errorMessage());
+				AppUtils.showLog(TAG, error.getErrorMessage());
 			}
 
 			@Override

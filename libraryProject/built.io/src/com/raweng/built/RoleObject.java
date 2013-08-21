@@ -33,7 +33,7 @@ public class RoleObject {
 	private JSONArray geoLocationArray     = null;
 
 	/**
-	 * Create {@link RoleObject} with specified role name.
+	 * Creates instance of {@link RoleObject} with specified role name.
 	 * 
 	 * @param roleName
 	 * 					 role name.
@@ -233,7 +233,7 @@ public class RoleObject {
 	public boolean isOwner() {
 		try{
 			BuiltUser user  = new BuiltUser();
-			user = BuiltUser.currentUser();
+			user = BuiltUser.getCurrentUser();
 			if(user != null && user.getUserUid() != null && ownerUid != null){
 				if(user.getUserUid().equalsIgnoreCase(ownerUid)){
 					return true;
@@ -379,7 +379,7 @@ public class RoleObject {
 
 
 					BuiltUser user     = new BuiltUser();
-					user = BuiltUser.currentUser();
+					user = BuiltUser.getCurrentUser();
 
 					if(builtACLUserObject != null){
 						JSONObject ACLObj = new JSONObject();
@@ -493,7 +493,7 @@ public class RoleObject {
 
 	private void throwExeception(BuiltResultCallBack callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}

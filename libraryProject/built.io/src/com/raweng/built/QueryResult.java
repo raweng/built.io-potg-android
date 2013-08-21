@@ -131,7 +131,7 @@ public class QueryResult{
 
 		}catch(Exception e){
 			BuiltError error = new BuiltError();
-			error.errorMessage(e.toString());
+			error.setErrorMessage(e.toString());
 		}
 	}
 

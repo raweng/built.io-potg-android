@@ -1,6 +1,5 @@
 package com.raweng.projectsonthego;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +14,7 @@ import com.raweng.built.BuiltResultCallBack;
 import com.raweng.built.BuiltRole;
 import com.raweng.built.BuiltUser;
 import com.raweng.built.RoleObject;
-import com.raweng.built.userInterface.BuiltAuthResultCallBack;
-import com.raweng.built.userInterface.BuiltLogin;
+import com.raweng.built.userInterface.BuiltUILoginController;
 import com.raweng.projectsonthego.Utilities.AppConstant;
 import com.raweng.projectsonthego.Utilities.AppSettings;
 import com.raweng.projectsonthego.Utilities.AppUtils;
@@ -26,11 +24,10 @@ import com.raweng.projectsonthego.Utilities.AppUtils;
  * @author raw engineering, Inc
  *
  */
-public class LoginActivity extends Activity{
+public class LoginActivity extends BuiltUILoginController{
 
 	private final String TAG = "LoginActivity";
 	Context context;
-	BuiltLogin builtlogin;
 	ProgressDialog progressDialog;
 
 	@Override
@@ -39,160 +36,33 @@ public class LoginActivity extends Activity{
 
 		context = LoginActivity.this;
 		getActionBar().setDisplayHomeAsUpEnabled(false);
-
-		//Initialise BuiltLogin instance.
-		builtlogin = new BuiltLogin(context);
 		
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setMessage(getResources().getString(R.string.loading));
 		progressDialog.setTitle(getResources().getString(R.string.please_wait));
 		progressDialog.setCancelable(false);
 		progressDialog.setCanceledOnTouchOutside(false);
-		builtlogin.setProgressDialog(progressDialog);
 		
-		//Set login layout from built.io sdk.
-		setContentView(builtlogin.getView());
-
+		//set progress dialog.
+		setProgressDialog(progressDialog);
+		
 		//Check if user is already logged in.
 		if(AppSettings.getIsLoggedIn(context)){
 			Intent mainIntent = new Intent(context, MainActivity.class);
 			startActivity(mainIntent);	
 			finish();
 		}
+		
 		//Set visibility false to default closeImageView in BuiltLogin layout.
-		builtlogin.closeImageView.setVisibility(View.GONE);
+		closeImageView.setVisibility(View.GONE);
 
-		//Open sign up activity.
-		builtlogin.signUpButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				Intent signUpIntent = new Intent(context, SignUpActivity.class);				
-				startActivity(signUpIntent);
-			}
-		});
-
-		//Provide functionality of google login.
-		builtlogin.googleLoginButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				
-				//This method is used for google login.
-				builtlogin.loginWithGoogle(new BuiltAuthResultCallBack() {
-					@Override
-					public void onSuccess(BuiltUser user) {
-						
-						//Set true when user successfully logged in.
-						AppSettings.setIsLoggedIn(true, context);
-						
-						//Set user uid.
-						AppSettings.setUserUid(user.getUserUid(), context);
-						try {
-							//Save the session of logged in user.
-							user.saveSession();
-						} catch (Exception e) {
-							AppUtils.showLog(TAG, e.toString());
-						}
-						checkAdminRole();
-					}
-
-					@Override
-					public void onError(BuiltError error) {
-						AppUtils.showLog(TAG, error.errorMessage());
-						Toast.makeText(context,error.errorMessage(),Toast.LENGTH_LONG).show();
-					}
-
-					@Override
-					public void onAlways() {		
-					}
-				});
-			}
-		});
-
-		//Provide functionality of built login.
-		builtlogin.loginButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				
-				//Check error for LoginActivity's edit texts. 
-				boolean checkError = builtlogin.checkLoginFieldsValidation();
-				if (!checkError) {
-
-					//This method is used for login with built.
-					builtlogin.loginWithBuiltUser(new BuiltAuthResultCallBack() {
-
-						@Override
-						public void onSuccess(BuiltUser user) {
-							
-							//Set true when user successfully logged in.
-							AppSettings.setIsLoggedIn(true, context);
-							
-							//Set user uid.
-							AppSettings.setUserUid(user.getUserUid(), context);
-							try {
-								//Save the session of logged in user.
-								user.saveSession();
-							} catch (Exception e) {
-								AppUtils.showLog(TAG,e.toString());
-							}
-							checkAdminRole();
-						}
-
-						@Override
-						public void onError(BuiltError error) {
-							AppUtils.showLog(TAG,error.errorMessage());
-							Toast.makeText(context,error.errorMessage(),Toast.LENGTH_LONG).show();
-						}
-
-						@Override
-						public void onAlways() {
-						}
-
-					});
-				}
-			}
-		});
+		Intent signUpIntent = new Intent(context,SignUpActivity.class);
+		
+		//Intent to open signUp Activity.
+		setSignUpIntent(signUpIntent);
 		
 		//Set twitter consumer key and consumer secret.
-		builtlogin.setUpTwitter("YOUR_CONSUMER_KEY", "YOUR_CONSUMER_SECRET");
-		
-		builtlogin.twitterLoginButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				builtlogin.loginWithTwitter(new BuiltAuthResultCallBack() {
-					
-					@Override
-					public void onSuccess(BuiltUser user) {
-						//Set true when user successfully logged in.
-						AppSettings.setIsLoggedIn(true, context);
-						
-						//Set user uid.
-						AppSettings.setUserUid(user.getUserUid(), context);
-						try {
-							//Save the session of logged in user.
-							user.saveSession();
-						} catch (Exception e) {
-							AppUtils.showLog(TAG, e.toString());
-						}
-						checkAdminRole();
-					}
-					
-					@Override
-					public void onError(BuiltError error) {
-						AppUtils.showLog(TAG, error.errorMessage());
-						Toast.makeText(context,error.errorMessage(),Toast.LENGTH_LONG).show();
-					}
-					
-					@Override
-					public void onAlways() {
-					}
-				});
-			}
-		});
-
+		setUpTwitter("YOUR_CONSUMER_KEY", "YOUR_CONSUMER_SECRET");
 	}
 	/**
 	 * Fetch user type of logged in user.
@@ -219,7 +89,7 @@ public class LoginActivity extends Activity{
 				String UID = null;
 				
 				//Get logged in user.
-				user =  BuiltUser.currentUser();
+				user =  BuiltUser.getSession();
 				if(user != null && user.getUserUid() != null){
 					UID = user.getUserUid();
 				}
@@ -242,7 +112,7 @@ public class LoginActivity extends Activity{
 
 			@Override
 			public void onError(BuiltError error) {
-				AppUtils.showLog(TAG,error.errorMessage());
+				AppUtils.showLog(TAG,error.getErrorMessage());
 			}
 
 			@Override
@@ -252,13 +122,28 @@ public class LoginActivity extends Activity{
 		});
 	}
 	
+	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+	public void loginSuccess(BuiltUser user) {
+		//Set true when user successfully logged in.
+		AppSettings.setIsLoggedIn(true, context);
 		
-		//This method is used to handle first time google login.
-		builtlogin.setOnActivityResult(requestCode, resultCode, data);
+		//Set user uid.
+		AppSettings.setUserUid(user.getUserUid(), context);
+		try {
+			//Save the session of logged in user.
+			user.saveSession();
+		} catch (Exception e) {
+			AppUtils.showLog(TAG, e.toString());
+		}
+		checkAdminRole();
 	}
+	@Override
+	public void loginError(BuiltError error) {
+		AppUtils.showLog(TAG, error.getErrorMessage());
+		Toast.makeText(context,error.getErrorMessage(),Toast.LENGTH_LONG).show();
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return super.onCreateOptionsMenu(menu);
@@ -268,6 +153,7 @@ public class LoginActivity extends Activity{
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
 	}
+	
 
 }
 

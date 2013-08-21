@@ -134,9 +134,11 @@ public class BuiltObject{
 	 *  
 	 */
 	public void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -1074,7 +1076,7 @@ public class BuiltObject{
 
 	/**
 	 * Save object data to built.io server with &#34;unpublished&#34; status 
-	 * so that it is not visible unless explicitly called for. see {@link com.raweng.built.BuiltQuery #includeDrafts()}.
+	 * so that it is not visible unless explicitly called for. see {@link com.raweng.built.BuiltQuery#includeDrafts()}.
 	 * 
 	 * @param callback 
 	 * 					 {@link BuildFileResultCallback} object to notify the application when the request has completed.
@@ -1113,7 +1115,7 @@ public class BuiltObject{
 
 	/**
 	 * Save object data to built.io server with &#34;unpublished&#34; status,
-	 * so that it is not visible unless explicitly called for. see {@link com.raweng.built.BuiltQuery #includeDrafts()}.
+	 * so that it is not visible unless explicitly called for. see {@link com.raweng.built.BuiltQuery#includeDrafts()}.
 	 * 
 	 * @param callback	
 	 * 					 {@link BuiltResultCallBack} object to notify the application when the request has completed.
@@ -1829,7 +1831,7 @@ public class BuiltObject{
 
 	private void throwExeception(BuiltResultCallBack callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}

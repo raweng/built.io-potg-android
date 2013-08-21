@@ -117,7 +117,7 @@ public class BuiltTwitterLoginActivity extends Activity {
 					BuiltTwitterLoginActivity.this.setResult(BuiltAppConstants.REQUEST_CODE_TWITTER_SUCCESS);
 				} catch (Exception e) { 
 					BuiltError builtError = new BuiltError();
-					builtError.errorMessage(e.toString());
+					builtError.setErrorMessage(e.toString());
 					Intent twitterAuthFail = new Intent();
 					twitterAuthFail.putExtra("error_message", e.toString());
 					BuiltTwitterLoginActivity.this.setResult(BuiltAppConstants.REQUEST_CODE_TWITTER_FAILED, twitterAuthFail);

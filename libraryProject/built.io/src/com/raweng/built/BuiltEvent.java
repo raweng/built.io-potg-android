@@ -27,7 +27,7 @@ public class BuiltEvent {
 	protected HashMap<String, Object> properties;
 
 	/**
-	 * Creates {@link BuiltEvent} instance with specified event uid.
+	 * Creates new {@link BuiltEvent} instance with specified event uid.
 	 *  
 	 * @param eventUid
 	 * 					event uid.

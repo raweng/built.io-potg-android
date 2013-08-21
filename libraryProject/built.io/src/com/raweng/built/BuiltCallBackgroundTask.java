@@ -317,8 +317,8 @@ class BuiltCallBackgroundTask {
 	//called when network is not available.
 	private void sendErrorToUser(ResultCallBack callbackObject){
 		BuiltError error = new BuiltError();
-		error.errorCode(BuiltAppConstants.NONETWORKCONNECTION);
-		error.errorMessage(BuiltAppConstants.ErrorMessage_NoNetwork);
+		error.setErrorCode(BuiltAppConstants.NONETWORKCONNECTION);
+		error.setErrorMessage(BuiltAppConstants.ErrorMessage_NoNetwork);
 		if(callbackObject != null){
 			callbackObject.onRequestFail(error);
 		}
@@ -326,7 +326,7 @@ class BuiltCallBackgroundTask {
 
 	private void sendErrorForHeader(ResultCallBack callbackObject) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
+		error.setErrorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
 		if(callbackObject != null){
 			callbackObject.onRequestFail(error);
 		}
@@ -385,10 +385,10 @@ class BuiltCallBackgroundTask {
 			}
 		}catch(Exception e) {
 			BuiltError error = new BuiltError();
-			error.errorMessage(BuiltAppConstants.ErrorMessage_SavingNetworkCallForOfflineSupport);
+			error.setErrorMessage(BuiltAppConstants.ErrorMessage_SavingNetworkCallForOfflineSupport);
 			HashMap<String, Object> hashMap = new HashMap<String, Object>();
 			hashMap.put("error", e);
-			error.errors(hashMap);
+			error.setErrors(hashMap);
 			RawAppUtils.showLog("BuiltCallBackgroundTask", "-----built.io----------createCacheFile-------cach|" + e);
 			if(callback != null){
 				callback.onRequestFail(error);

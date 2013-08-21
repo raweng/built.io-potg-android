@@ -23,18 +23,21 @@ public class UploadedFileModel {
 		}else{
 			json = responseJSON.optJSONObject("upload");
 		}
-	
+
 		uploadedUid = (String) json.opt("uid");
 		contentType = (String) json.opt("content_type");
 		fileSize = (String) json.opt("file_size");
 		fileName = (String) json.opt("filename");
 		uploadUrl = (String) json.opt("url");
-		JSONArray tagsArray =  (JSONArray) json.opt("tags");
-		if(tagsArray.length() > 0){
-			int count = tagsArray.length();
-			tags = new String[count];
-			for(int i = 0; i < count; i++){
-				tags[i] = (String) tagsArray.opt(i);
+
+		if(json.optString("tags").isEmpty()){
+			JSONArray tagsArray =  (JSONArray) json.opt("tags");
+			if(tagsArray.length() > 0){
+				int count = tagsArray.length();
+				tags = new String[count];
+				for(int i = 0; i < count; i++){
+					tags[i] = (String) tagsArray.opt(i);
+				}
 			}
 		}
 

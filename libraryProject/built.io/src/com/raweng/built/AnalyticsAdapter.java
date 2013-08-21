@@ -21,7 +21,7 @@ public class AnalyticsAdapter {
 
 	private SQLiteDatabase database;
 	private static final String DATABASE_NAME 	= "built.io";
-	private static final int DATABASE_VERSION 	= 4;
+	private static final int DATABASE_VERSION 	= 5;
 
 	private static final String TABLE_NAME 		= "AnalyticsEvent";
 	private static final String KEY_EVENTID 	= "eventId";
@@ -143,7 +143,7 @@ public class AnalyticsAdapter {
 		}
 	}
 
-
+	
 	private class AnalyticsDbHelper extends SQLiteOpenHelper{
 
 		AnalyticsDbHelper(Context context){

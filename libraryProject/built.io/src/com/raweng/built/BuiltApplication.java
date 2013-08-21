@@ -100,7 +100,7 @@ public class BuiltApplication {
 	}
 
 	/**
-	 * Create a new BuiltApplication object.
+	 * Creates new {@link BuiltApplication} instance.
 	 */
 	public BuiltApplication() {
 		headerGroup_local = new HeaderGroup();
@@ -152,9 +152,11 @@ public class BuiltApplication {
 	 *  
 	 */
 	public void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -196,14 +198,14 @@ public class BuiltApplication {
 				new BuiltCallBackgroundTask(this, BuiltControllers.APPLICATIONSETTINGS, URL, header, mainJson, null, callController.BUILTAPPLICATION.toString(), callback);
 			}else{
 				BuiltError error = new BuiltError();
-				error.errorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
+				error.setErrorMessage(BuiltAppConstants.ErrorMessage_CalledBuiltDefaultMethod);
 				if(callback != null){
 					callback.onRequestFail(error);
 				}
 			}
 		}catch (Exception e) {
 			BuiltError error = new BuiltError();
-			error.errorMessage(e.toString());
+			error.setErrorMessage(e.toString());
 			if(callback != null){
 				callback.onRequestFail(error);
 			}
@@ -261,7 +263,7 @@ public class BuiltApplication {
 
 		return json;
 	}
-	
+
 	/*************************************************************************************************
 	 * 
 	 ************  Private Methods  *******************

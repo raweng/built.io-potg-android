@@ -35,7 +35,7 @@ public class BuiltDelta implements INotifyClass {
 	BuiltDeltaResultCallback builtDeltaResultCallback;
 
 	/**
-	 * {@link BuiltDelta} instance.
+	 * Creates new {@link BuiltDelta} instance.
 	 * 
 	 * @param classUid
 	 * 					Class uid of which delta object needs to be fetched.
@@ -82,6 +82,7 @@ public class BuiltDelta implements INotifyClass {
 	public void setHeader(String key, String value){
 
 		if(key != null && value != null){
+			removeHeader(key);
 			headerGroup_local.addHeader(new BasicHeader(key, value));
 		}
 	}
@@ -96,10 +97,12 @@ public class BuiltDelta implements INotifyClass {
 	 * 			  header key for which to remove the header value.
 	 * 
 	 */
-	public  void removeHeader(String key){
-		if(headerGroup_local.containsHeader(key)){
-			org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
-			headerGroup_local.removeHeader(header);
+	public void removeHeader(String key){
+		if(headerGroup_local != null){
+			if(headerGroup_local.containsHeader(key)){
+				org.apache.http.Header header =  headerGroup_local.getCondensedHeader(key);
+				headerGroup_local.removeHeader(header);
+			}
 		}
 	}
 
@@ -301,7 +304,7 @@ public class BuiltDelta implements INotifyClass {
 
 	private void throwExeception(BuiltDeltaResultCallback callback, String errorMessage) {
 		BuiltError error = new BuiltError();
-		error.errorMessage(errorMessage);
+		error.setErrorMessage(errorMessage);
 		if(callback != null){
 			callback.onRequestFail(error);
 		}
