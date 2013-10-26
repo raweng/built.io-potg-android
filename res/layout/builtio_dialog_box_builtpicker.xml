@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/change_photo_dialog"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_centerInParent="true" >
+
+    <Button
+        android:id="@+id/choose_frmgallery"
+        android:layout_width="fill_parent"
+        android:layout_height="35dip"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/builtio_selector_dialog_box_asset"
+        android:drawableRight="@drawable/ic_builtio_gallery"
+        android:gravity="left|center"
+        android:paddingLeft="8dip"
+        android:paddingRight="10dip"
+        android:text="@string/builtio_choose_from_gallery_button"
+        android:textColor="@android:color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/click_pic"
+        android:layout_width="fill_parent"
+        android:layout_height="35dip"
+        android:layout_below="@id/choose_frmgallery"
+        android:background="@drawable/builtio_selector_dialog_box_asset"
+        android:drawableRight="@drawable/ic_builtio_click_a_photo"
+        android:gravity="left|center"
+        android:paddingLeft="8dip"
+        android:paddingRight="10dip"
+        android:text="@string/builtio_click_a_photo_button"
+        android:textColor="@android:color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/capture_video"
+        android:layout_width="fill_parent"
+        android:layout_height="35dip"
+        android:layout_below="@id/click_pic"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/builtio_selector_dialog_box_asset"
+        android:drawableRight="@drawable/ic_builtio_click_a_photo"
+        android:gravity="left|center"
+        android:paddingLeft="8dip"
+        android:paddingRight="10dip"
+        android:text="@string/builtio_record_video_button"
+        android:textColor="@android:color/black"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/choose_library"
+        android:layout_width="fill_parent"
+        android:layout_height="35dip"
+        android:layout_below="@id/capture_video"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/builtio_selector_dialog_box_asset"
+        android:drawableRight="@drawable/ic_builtio_gallery"
+        android:gravity="left|center"
+        android:paddingLeft="8dip"
+        android:paddingRight="10dip"
+        android:text="@string/builtio_choose_from_library_button"
+        android:textColor="@android:color/black"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+</RelativeLayout>

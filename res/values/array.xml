@@ -1,0 +1,28 @@
+<resources>
+
+    <string-array name="class_array">
+        <item>Project</item>
+        <item>Task</item>
+        <item>MileStone</item>
+        <item>Bugs</item>
+    </string-array>
+    <string-array name="status">
+        <item>Open</item>
+        <item>In Progress</item>
+        <item>To Be Tested</item>
+        <item>Closed</item>
+    </string-array>
+    <string-array name="severity">
+        <item>Show Stopper</item>
+        <item>Critical</item>
+        <item>Major</item>
+        <item>Minor</item>
+    </string-array>
+    <string-array name="reproducible">
+        <item>Always</item>
+        <item>Sometimes</item>
+        <item>Rarely</item>
+        <item>Unable</item>
+    </string-array>
+
+</resources>
