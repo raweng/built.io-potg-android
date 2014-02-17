@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical" >
+
+    <TextView
+        android:id="@+id/createBugLabel"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/title"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/createBugName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/createBugLabel"
+        android:ems="10"
+        android:hint="@string/bug_name"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/createBugDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createBugName"
+        android:ems="10"
+        android:hint="@string/bug_description"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:textSize="16sp"
+        android:typeface="serif" />
+
+    <Button
+        android:id="@+id/createBugAttachfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createBugDesc"
+        android:text="@string/add_attachment"
+        android:textSize="16sp"
+        android:typeface="serif" />
+
+    <com.raweng.projectsonthego.Utilities.FlowLayout
+        android:id="@+id/createBugAttachmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/createBugAttachfile"
+        android:orientation="vertical" >
+    </com.raweng.projectsonthego.Utilities.FlowLayout>
+
+    <ScrollView
+        android:id="@+id/assignScrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createBugAttachmentContainer" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/spinnerStatusContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/status"
+                    android:textSize="12sp" />
+
+                <Spinner
+                    android:id="@+id/createBugspinnerStatus"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/spinnerSeverityContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinnerStatusContainer"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/severity"
+                    android:textSize="12sp" />
+
+                <Spinner
+                    android:id="@+id/createBugspinnerSeverity"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/spinnerReproducibleContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinnerSeverityContainer"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/reproducible"
+                    android:textSize="12sp" />
+
+                <Spinner
+                    android:id="@+id/createBugspinnerReproducible"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/createBugDueDateLabel"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/spinnerReproducibleContainer"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/due_date"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <EditText
+                android:id="@+id/createBugDueDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinnerReproducibleContainer"
+                android:layout_toRightOf="@id/createBugDueDateLabel"
+                android:hint="@string/due_date_no_colon"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/assignContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/createBugDueDate"
+                android:background="#F7F7F7" >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="@string/assignee_label"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+
+                <Button
+                    android:id="@+id/createBugAddUserButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_toRightOf="@id/textView4"
+                    android:padding="0dp"
+                    android:text="+"
+                    android:textSize="20sp" />
+
+                <com.raweng.projectsonthego.Utilities.FlowLayout
+                    android:id="@+id/createBugUserContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/createBugAddUserButton"
+                    android:orientation="vertical" >
+                </com.raweng.projectsonthego.Utilities.FlowLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

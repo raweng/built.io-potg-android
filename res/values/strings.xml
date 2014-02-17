@@ -1,0 +1,172 @@
+<!--
+  Copyright 2013 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<resources>
+
+    <string name="app_name">Projects On The Go</string>
+    <string name="title_activity_login">Login Activity</string>
+    <string name="title_activity_createbug">Create bug</string>
+    <string name="update_bug">Update bug</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="bugname">Name</string>
+    <string name="attachment">Attachment</string>
+    <string name="add_attachment">Add attachment</string>
+    <string name="assignee_label">Assignees</string>
+    <string name="project_name_hint_text">Project Name</string>
+    <string name="description_hint_text">Description</string>
+    <string name="name_hint_text">Name</string>
+    <string name="steps_label">Steps</string>
+    <string name="add_step"> Add step</string>
+    <string name="proj_moderators_label">Moderators</string>
+    <string name="proj_members_label">Members</string>
+    <string name="users_added_text">Users Added</string>
+    <string name="title">Title :</string>
+    <string name="due_date">Due date :</string>
+    <string name="bug_description">Bug description</string>
+    <string name="bug_name">Bug name</string>
+    <string name="status">Status</string>
+    <string name="severity">Severity</string>
+    <string name="reproducible">Reproducible</string>
+    <string name="created_by">Created by :</string>
+    <string name="created_at">Created at :</string>
+    <string name="bug_title">Bug title</string>
+    <string name="bug_created_by">Bug created by</string>
+    <string name="created_at_no_colon">Created at</string>
+    <string name="due_date_no_colon">Due date</string>
+    <string name="task_name">Task name</string>
+    <string name="task_description">Task description</string>
+    <string name="task_steps">Steps</string>
+    <string name="create_task">Create task</string>
+    <string name="select_user">Select user</string>
+    <string name="comments">Comments :</string>
+    <string name="step_task_name">Step task name</string>
+    <string name="step_task_description">Step task description</string>
+    <string name="is_complete">is complete?</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="name">Name</string>
+    <string name="oops_something_went_wrong">Oops! Something went wrong</string>
+    <string name="assignees">Assignees</string>
+    <string name="update">Update</string>
+    <string name="menu_name">menu_name</string>
+    <string name="menu_uid">menu_uid</string>
+    <string name="loading_task_list">Loading task list...</string>
+    <string name="loading_project_list">Loading project list...</string>
+    <string name="loading_bugs_list">Loading bugs list...</string>
+    <string name="loading_milestone_list">Loading milestone list...</string>
+    <string name="loading_comments_list">Loading comments list...</string>
+    <string name="loading">Loading....</string>
+    <string name="updating_task">Updating task...</string>
+    <string name="creating_project">Creating project...</string>
+    <string name="creating_task">Creating task...</string>
+     <string name="updating_bug">Updating bug...</string>
+    <string name="creating_bug">Creating bug...</string>
+    <string name="updating_milestone">Updating milestone...</string>
+    <string name="fetching_role">Fetching role...</string>
+    <string name="checking_for_admin">Checking for admin...</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="task_deleted_successfully">Task deleted successfully.</string>
+    <string name="bug_deleted_successfully">Bug deleted successfully.</string>
+    <string name="milestone_deleted_successfully">Milestone deleted successfully.</string>
+    <string name="task_updated_successfully">Task updated successfully.</string>
+    <string name="bug_updated_successfully">Bug updated successfully.</string>
+    <string name="milestone_updated_successfully">Milestone updated successfully.</string>
+    <string name="create_milestone">Create milestone</string>
+    <string name="set_date">Set date</string>
+    <string name="set_due_date">Set due date</string>
+    <string name="create_project">Create project</string>
+    <string name="project_created_successfully">Project created successfully.</string>
+    <string name="bug_created_successfully">Bug created successfully.</string>
+    <string name="task_created_successfully">Task created successfully.</string>
+    <string name="milestone_created_successfully">Milestone created successfully.</string>
+    <string name="really_want_to_delete_bug">Really want to delete bug</string>
+    <string name="delete_bug">Delete bug</string>
+    <string name="delete">Delete</string>
+    <string name="making_comment">Making comment</string>
+    <string name="create">Create</string>
+    <string name="really_want_to_delete_milestone">Really want to delete milestone</string>
+    <string name="delete_milestone">Delete Milestone</string>
+    <string name="really_want_to_delete_task">Really want to delete task ?</string>
+    <string name="delete_task">Delete task</string>
+    <string name="nothing_selected">Nothing Selected</string>
+    <string name="select_file_for_attachment">Select file for attachment</string>
+    <string name="fragment_edit_name">fragment_edit_name</string>
+    <string name="login_for_access">Login for Access</string>
+    <string name="deleting_bug_">Deleting bug...</string>
+    <string name="deleting_task">Deleting Task...</string>
+    <string name="deleting_milestone">Deleting milestone...</string>
+    <string name="loading_comments_count">Loading comments count...</string>
+
+    <string name="builtio_app_name">built.io</string>
+    <string name="builtio_action_settings">Settings</string>
+    <string name="builtio_prompt_tenant">tenant</string>
+    <string name="builtio_prompt_email">username</string>
+    <string name="builtio_prompt_password">password</string>
+    <string name="builtio_prompt_retype_passsword">retype password</string>
+    <string name="builtio_action_sign_in_register">Sign up</string>
+    <string name="builtio_action_sign_in_short">Sign in</string>
+    <string name="builtio_action_forgot_password">Recover lost password</string>
+    <string name="builtio_login_progress_signing_in">Signing in&#8230;</string>
+    <string name="builtio_error_invalid_email">This email address is invalid</string>
+    <string name="builtio_error_invalid_password">This password is too short</string>
+    <string name="builtio_error_incorrect_password">This password is incorrect</string>
+    <string name="builtio_error_field_required">This field is required</string>
+    <string name="builtio_log_in">Log In</string>
+    <string name="builtio_google_login">Google</string>
+    <string name="builtio_twitter_login">Twitter</string>
+    <string name="builtio_sign_up">Sign up</string>
+    <string name="builtio_or_you_can_login_with">or you can login with</string>
+    <string name="builtio_dont_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="builtio_account_name">account name</string>
+    <string name="builtio_email">email</string>
+    <string name="builtio_search">Search</string>
+    <string name="builtio_back">Back</string>
+    <string name="builtio_choose_options_title">Choose Options</string>
+    <string name="builtio_no_data_text"> No Data</string>
+    <string name="builtio_cancel_text_capital_button"> Cancel </string>
+    <string name="builtio_no_file_chosen">No File Chosen</string>
+    <string name="builtio_sdcard_not_found_error_text">SD card not found</string>
+    <string name="builtio_select_picture_text">Select</string>
+    <string name="builtio_capture_video_text">Video size should not be more than 10 MB</string>
+    <string name="builtio_an_error_occurred_while_reading_a_file_error_text">An error occurred while reading a file.</string>
+    <string name="builtio_image_capture_by_camera_text">Image capture by camera</string>
+    <string name="builtio_video_capture_by_camera">Video capture by camera</string>
+    <string name="builtio_record_video_button">Record video</string>
+    <string name="builtio_choose_from_library_button">Choose from library</string>
+    <string name="builtio_file_selected_already_error_text">This file is already selected.</string>
+
+    <!-- <asset and choose pic > -->
+    <string name="builtio_choose_from_gallery_button">Choose from Gallery</string>
+    <string name="builtio_click_a_photo_button">Click a Photo</string>
+    <string name="builtio_ok_button">Okay</string>
+    <string name="builtio_picture_not_taken_error_text">Picture was not taken</string>
+    <string name="builtio_video_not_taken_error_text">Video was not taken</string>
+    <string name="builtio_video_path_error_error_text">Unable to retrieve recorded video path, please attach manually.</string>
+
+    <!-- PulltoRefresh Strings -->
+    <string name="builtio_pull_to_refresh_pull_label">Pull to refresh…</string>
+    <string name="builtio_pull_to_refresh_release_label">Release to refresh…</string>
+    <string name="builtio_pull_to_refresh_refreshing_label">Loading…</string>
+    <string name="builtio_no_more">No more objects</string>
+    <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
+    <string name="builtio_pull_to_refresh_from_bottom_pull_label">@string/builtio_pull_to_refresh_pull_label</string>
+    <string name="builtio_pull_to_refresh_from_bottom_release_label">@string/builtio_pull_to_refresh_release_label</string>
+    <string name="builtio_pull_to_refresh_from_bottom_refreshing_label">@string/builtio_pull_to_refresh_refreshing_label</string>
+    
+</resources>
