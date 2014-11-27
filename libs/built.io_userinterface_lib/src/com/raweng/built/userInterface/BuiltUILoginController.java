@@ -144,7 +144,7 @@ public abstract class BuiltUILoginController extends FragmentActivity{
 		setContentView(R.layout.builtio_login_activity);
 
 		tenantEditText 	             =  (EditText) findViewById(R.id.tenant);
-		emailEditText 	             =  (EditText) findViewById(R.id.emailSignUp);
+		emailEditText 	             =  (EditText) findViewById(R.id.emailLogin);
 		passwordEditText             =  (EditText) findViewById(R.id.password);
 
 		closeImageView               =  (ImageView) findViewById(R.id.closeLogo);

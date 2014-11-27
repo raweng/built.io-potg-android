@@ -116,7 +116,7 @@
     <string name="builtio_app_name">built.io</string>
     <string name="builtio_action_settings">Settings</string>
     <string name="builtio_prompt_tenant">tenant</string>
-    <string name="builtio_prompt_email">username</string>
+    <string name="builtio_prompt_email">email</string>
     <string name="builtio_prompt_password">password</string>
     <string name="builtio_prompt_retype_passsword">retype password</string>
     <string name="builtio_action_sign_in_register">Sign up</string>
