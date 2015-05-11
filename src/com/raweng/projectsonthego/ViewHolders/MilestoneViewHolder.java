@@ -1,9 +1,7 @@
 package com.raweng.projectsonthego.ViewHolders;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
-import android.annotation.SuppressLint;
 import android.widget.TextView;
 
 import com.raweng.built.BuiltObject;
@@ -14,10 +12,9 @@ public class MilestoneViewHolder {
 	public TextView milestoneTitleInitial;
 	public TextView milestoneName;
 	public TextView milestoneStartEndDate;
-	Date startDateCalendar;
-	Date endDateCalendar;
+	Calendar startDateCalendar;
+	Calendar endDateCalendar;
 	
-	@SuppressLint("SimpleDateFormat")
 	public void populateView(BuiltObject builtObject) {
 
 		String title = builtObject.getString("name");
@@ -29,27 +26,20 @@ public class MilestoneViewHolder {
 		String endDate   = builtObject.getString("end_date");
 		
 		try{
-
-			SimpleDateFormat tibdateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-			startDateCalendar = tibdateFormatter.parse(startDate);
-			endDateCalendar   = tibdateFormatter.parse(endDate);
-		
+			startDateCalendar = AppUtils.parseDate(startDate);
+			endDateCalendar   = AppUtils.parseDate(endDate);
 		}catch(Exception e){
 			AppUtils.showLog("MilestoneViewHolder", "----------------------|"+e.toString());
 		}
 		
 		if (startDateCalendar != null ) {
-			SimpleDateFormat dateFormatter  = new SimpleDateFormat("dd");
-			SimpleDateFormat monthFormatter = new SimpleDateFormat("MM");
-			SimpleDateFormat yearFormatter  = new SimpleDateFormat("yyyy");
-			
-			String date = "From " + dateFormatter.format(startDateCalendar) + "/"
-					+ monthFormatter.format(startDateCalendar) + "/"
-					+ yearFormatter.format(startDateCalendar);
+			String date = "From " + startDateCalendar.get(Calendar.DATE) + "/"
+					+ startDateCalendar.get(Calendar.MONTH) + "/"
+					+ startDateCalendar.get(Calendar.YEAR);
 			if (endDateCalendar != null){
-				date = date + " To " + dateFormatter.format(endDateCalendar)  + "/"
-				+ monthFormatter.format(endDateCalendar) + "/"
-				+ yearFormatter.format(endDateCalendar);
+				date = date + " To " + endDateCalendar.get(Calendar.DATE) + "/"
+				+ endDateCalendar.get(Calendar.MONTH) + "/"
+				+ endDateCalendar.get(Calendar.YEAR);
 			}
 			milestoneStartEndDate.setText(date);
 		}
