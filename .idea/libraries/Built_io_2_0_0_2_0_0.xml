@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Built.io-2.0.0-2.0.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.raweng.aar/Built.io-2.0.0/2.0.0/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.raweng.aar/Built.io-2.0.0/2.0.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
