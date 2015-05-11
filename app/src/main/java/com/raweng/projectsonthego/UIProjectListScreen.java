@@ -67,7 +67,7 @@ public class UIProjectListScreen extends Fragment {
 		classUID = "project";
 
         try {
-            builtApplication = Built.application(getActivity(), "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(getActivity(), "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,7 +80,7 @@ public class UIProjectListScreen extends Fragment {
 		progressDialog.show();
 
 		//Intialize BuiltListViewProvider instance.
-		listView = new BuiltUIListViewController(getActivity(),"blt3b011c0e38ed1d82","project");
+		listView = new BuiltUIListViewController(getActivity(),"API_KEY","project");
 
 		//Make a call for load project list.
 		listView.loadData(new BuiltListViewResultCallBack() {

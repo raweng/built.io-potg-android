@@ -49,7 +49,7 @@ public class ProjectMilestoneFragment extends Fragment {
 		this.setHasOptionsMenu(true);
 
 		//Initialize BuiltListViewProvider instance using context and CLASSUID.
-		listView = new BuiltUIListViewController(getActivity(), "blt3b011c0e38ed1d82",CLASSUID);
+		listView = new BuiltUIListViewController(getActivity(), "API_KEY",CLASSUID);
 
 
 		getActivity().setTitle(menuName);

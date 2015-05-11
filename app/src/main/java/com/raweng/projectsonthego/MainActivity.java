@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 		context = MainActivity.this;
 
         try {
-            builtApplication = Built.application(context, "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(context, "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }

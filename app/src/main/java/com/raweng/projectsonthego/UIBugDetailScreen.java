@@ -134,7 +134,7 @@ public class UIBugDetailScreen extends FragmentActivity implements IFetchUserLis
 		}
 
         try {
-            builtApplication = Built.application(context, "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(context, "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -673,7 +673,7 @@ public class UIBugDetailScreen extends FragmentActivity implements IFetchUserLis
 				//Set assignees uid's to assignees field.
 				object.setReference("assignees", assigneeUid);
 				//Set permission newly added assignees.
-				BuiltACL builtacl = new BuiltACL();
+				BuiltACL builtacl = builtApplication.acl();
 				if(assigneeUid != null){
 					for(int i = 0; i < assigneeUid.length; i++){
 						builtacl.setUserReadAccess(assigneeUid[i], true);

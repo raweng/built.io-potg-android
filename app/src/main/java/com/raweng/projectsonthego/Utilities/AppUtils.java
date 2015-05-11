@@ -31,7 +31,6 @@ public class AppUtils {
 	 * 
 	 * Returns calendar object
 	 * @param
-	 * 		string date
 	 * 
 	 */
 	public static Calendar parseDate(String date) throws ParseException {

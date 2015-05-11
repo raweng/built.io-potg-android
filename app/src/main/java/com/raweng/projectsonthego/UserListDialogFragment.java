@@ -84,7 +84,7 @@ public class UserListDialogFragment extends DialogFragment implements OnEditorAc
         progressBar		       = (ProgressBar)view.findViewById(R.id.lodingUser);
 
         try {
-            builtApplication = Built.application(getActivity(), "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(getActivity(), "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }

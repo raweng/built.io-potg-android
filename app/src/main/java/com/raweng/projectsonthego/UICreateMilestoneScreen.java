@@ -101,7 +101,7 @@ public class UICreateMilestoneScreen extends Activity implements IFetchUserList{
          * Initialised builtApplication here.
          */
         try {
-            builtApplication = Built.application(context ,  "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(context ,  "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,7 +261,7 @@ public class UICreateMilestoneScreen extends Activity implements IFetchUserList{
 		object.setReference("project",projectUid);
 
 		try {
-			BuiltACL milestoneACL = new BuiltACL();
+			BuiltACL milestoneACL = builtApplication.acl();
 
 			//Members have read access for a milestone. Moderators have read, update, delete access for a milestone.
 			if(memberRoleUid != null){

@@ -81,7 +81,7 @@ public class UICreateTaskScreen extends Activity implements IFetchUserList{
          * Initialised builtApplication here.
          */
         try {
-            builtApplication = Built.application(context, "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(context, "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,7 +163,7 @@ public class UICreateTaskScreen extends Activity implements IFetchUserList{
 		object.set("steps", stepsList);
 		object.set("assignees", assigneesUid);
 		try {
-			BuiltACL taskACL = new BuiltACL();
+			BuiltACL taskACL = builtApplication.acl();
 			//Members have read access for a milestone. Moderators have read, update, delete access for a milestone.
 			//Set permission for team_memberRoleUid && moderatorRoleUid 
 			if(memberRoleUid != null){

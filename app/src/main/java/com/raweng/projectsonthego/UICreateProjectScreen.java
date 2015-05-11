@@ -70,7 +70,7 @@ public class UICreateProjectScreen extends Activity implements IFetchUserList{
          * Initialised builtApplication here.
          */
         try {
-            builtApplication = Built.application(context, "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(context, "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -213,7 +213,7 @@ public class UICreateProjectScreen extends Activity implements IFetchUserList{
                             membersArray = builtObject.getJSONArray("members");
 
                             //Set a ACL for object.
-                            BuiltACL acl = new BuiltACL();
+                            BuiltACL acl = builtApplication.acl();
                             acl.setRoleReadAccess((String) membersArray.opt(0), true);
                             acl.setRoleReadAccess((String) moderatorsArray.opt(0), true);
                             acl.setRoleWriteAccess((String) moderatorsArray.opt(0), true);

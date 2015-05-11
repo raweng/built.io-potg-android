@@ -62,7 +62,7 @@ public class UICommentScreen extends Activity{
          * Initialised builtApplication here.
          */
         try {
-            builtApplication = Built.application(this, "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(this, "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }

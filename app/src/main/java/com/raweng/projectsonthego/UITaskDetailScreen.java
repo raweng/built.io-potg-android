@@ -107,7 +107,7 @@ public class UITaskDetailScreen extends Activity implements IFetchUserList{
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
         try {
-            builtApplication = Built.application(this, "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(this, "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }

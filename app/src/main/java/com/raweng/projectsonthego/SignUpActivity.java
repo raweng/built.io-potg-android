@@ -42,7 +42,7 @@ public class SignUpActivity extends BuiltUISignUpController {
 		closeImageView.setVisibility(View.GONE);
 
         //Set api key for signup
-        setApplicationKey("blt3b011c0e38ed1d82");
+        setApplicationKey("API_KEY");
 		
 	}
 	

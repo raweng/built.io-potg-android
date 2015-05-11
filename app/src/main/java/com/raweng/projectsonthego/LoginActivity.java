@@ -47,7 +47,7 @@ public class LoginActivity extends BuiltUILoginController{
 		getActionBar().setDisplayHomeAsUpEnabled(false);
 
         try {
-            builtApplication = Built.application(context , "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(context , "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,7 +68,7 @@ public class LoginActivity extends BuiltUILoginController{
 		}
 
         //Set api key for login
-        setApplicationKey("blt3b011c0e38ed1d82");
+        setApplicationKey("API_KEY");
 
 		//Set visibility false to default closeImageView in BuiltLogin layout.
 		closeImageView.setVisibility(View.GONE);
@@ -79,7 +79,7 @@ public class LoginActivity extends BuiltUILoginController{
 		setSignUpIntent(signUpIntent);
 		
 		//Set twitter consumer key and consumer secret.
-		setUpTwitter("s0z8YN9VKG3oYWKWp3JCA", "MorhBcl9ITaw0xnuGbaSjKrNNCWCD1XUzxScPsUjoI");
+		setUpTwitter("YOUR_CONSUMER_KEY", "YOUR_CONSUMER_SECRET");
 	}
 	/**
 	 * Fetch user type of logged in user.

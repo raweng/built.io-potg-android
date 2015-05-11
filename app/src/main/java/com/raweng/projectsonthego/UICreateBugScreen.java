@@ -122,7 +122,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
          * Initialised builtApplication here.
          */
         try {
-            builtApplication = Built.application(context, "blt3b011c0e38ed1d82");
+            builtApplication = Built.application(context, "API_KEY");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -481,7 +481,7 @@ public class UICreateBugScreen extends FragmentActivity implements IFetchUserLis
 		object.setReference("project",uidArray);
 
 		try {
-			BuiltACL bugACL = new BuiltACL();
+			BuiltACL bugACL = builtApplication.acl();
 			//Member have read access for a bug. Moderators have read, update, and delete access for a bug.
 			//Set permission for team_memberRoleUid && moderatorRoleUid 
 			if(memberRoleUid != null){
